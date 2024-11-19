@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Вячеслав Уминов](https://up.htmlacademy.ru/react/17/user/2465693).
-* Наставник: `Неизвестно`.
+- Студент: [Вячеслав Уминов](https://up.htmlacademy.ru/react/17/user/2465693).
+- Наставник: [Сергей Зуев](https://htmlacademy.ru/profile/ekzaton).
 
 ---
 
