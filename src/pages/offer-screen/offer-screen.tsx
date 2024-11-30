@@ -1,9 +1,13 @@
 import Header from '../../components/header/header';
+import { Helmet } from 'react-helmet-async';
 import Map from '../../components/map/map';
 
 function OfferScreen(): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 городов. Предложения</title>
+      </Helmet>
       <Header/>
 
       <main className="page__main page__main--offer">

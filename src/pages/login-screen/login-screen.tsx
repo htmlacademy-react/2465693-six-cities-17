@@ -1,11 +1,14 @@
 import Header from '../../components/header/header';
+import { Helmet } from 'react-helmet-async';
 
 
 function LoginScreen(): JSX.Element {
   const isHeaderNav = false;
   return (
     <div className="page page--gray page--login">
-
+      <Helmet>
+        <title>6 городов. Добро пожаловать!</title>
+      </Helmet>
       <Header isHeaderNav = {isHeaderNav} />
 
       <main className="page__main page__main--login">

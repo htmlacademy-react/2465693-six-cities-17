@@ -1,9 +1,13 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import { Helmet } from 'react-helmet-async';
 
 function FavoritesScreen(): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 городов. Избранное</title>
+      </Helmet>
       <Header/>
 
       <main className="page__main page__main--favorites">
