@@ -2,4 +2,12 @@ const Setting = {
   OfferCards: 5,
 } as const;
 
-export { Setting };
+const enum RoutePath {
+  INDEX = '/',
+  LOGIN = '/login',
+  FAVORITES = '/favorites',
+  OFFER = '/offer/:id',
+  NOT_FOUND = '*'
+}
+
+export { Setting, RoutePath };
