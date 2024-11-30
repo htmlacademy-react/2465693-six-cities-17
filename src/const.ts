@@ -3,11 +3,17 @@ const Setting = {
 } as const;
 
 const enum RoutePath {
-  INDEX = '/',
-  LOGIN = '/login',
-  FAVORITES = '/favorites',
-  OFFER = '/offer/:id',
-  NOT_FOUND = '*'
+  Index = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id',
+  NotFound = '*'
 }
 
-export { Setting, RoutePath };
+const enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export { AuthorizationStatus, Setting, RoutePath};
