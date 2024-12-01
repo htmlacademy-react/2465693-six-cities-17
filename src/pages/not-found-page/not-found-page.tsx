@@ -4,13 +4,13 @@ import { Helmet } from 'react-helmet-async';
 import { Fragment } from 'react';
 
 function NotFoundScreen():JSX.Element{
-  const isHeaderNav = false;
+  const hideNav = true;
   return (
     <Fragment>
       <Helmet>
         <title>6 городов. Станица не найдена</title>
       </Helmet>
-      <Header isHeaderNav = {isHeaderNav} />
+      <Header hideNav = {hideNav} />
       <main className="page__main">
         <div className="container">
           <h1 style={{fontSize: '138px'}}>404</h1>

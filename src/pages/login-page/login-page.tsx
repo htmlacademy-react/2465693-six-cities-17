@@ -3,13 +3,13 @@ import { Helmet } from 'react-helmet-async';
 
 
 function LoginScreen(): JSX.Element {
-  const isHeaderNav = false;
+  const hideNav = true;
   return (
     <div className="page page--gray page--login">
       <Helmet>
         <title>6 городов. Добро пожаловать!</title>
       </Helmet>
-      <Header isHeaderNav = {isHeaderNav} />
+      <Header hideNav = {hideNav} />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
