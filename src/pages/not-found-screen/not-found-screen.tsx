@@ -11,11 +11,13 @@ function NotFoundScreen():JSX.Element{
         <title>6 городов. Станица не найдена</title>
       </Helmet>
       <Header isHeaderNav = {isHeaderNav} />
-      <div className="error-container">
-        <h1 >404</h1>
-        <p>Oops! The page you are looking for does not exist.</p>
-        <Link to="/">Click to return to the main page</Link>
-      </div>
+      <main className="page__main">
+        <div className="container">
+          <h1 style={{fontSize: '138px'}}>404</h1>
+          <p style={{fontSize: '16px'}}>Oops! The page you are looking for does not exist.</p>
+          <Link to="/"style={{cursor: 'pointer', textDecoration: 'underline'}}>Click to return to the main page</Link>
+        </div>
+      </main>
     </Fragment>
   );
 }
