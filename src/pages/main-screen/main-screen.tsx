@@ -1,4 +1,4 @@
-import LocationsList from '../../components/locations/locations-list';
+import LocationsList from '../../components/locations-list/locations-list';
 import OfferCard from '../../components/offer-card/offer-card';
 import Header from '../../components/header/header';
 import Sort from '../../components/sort/sort';
