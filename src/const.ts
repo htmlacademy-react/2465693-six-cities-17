@@ -1,7 +1,3 @@
-const Setting = {
-  OfferCards: 5,
-} as const;
-
 const enum RoutePath {
   Index = '/',
   Login = '/login',
@@ -16,4 +12,4 @@ const enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { AuthorizationStatus, Setting, RoutePath};
+export { AuthorizationStatus, RoutePath};

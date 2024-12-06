@@ -7,18 +7,19 @@ import MainScreen from '../../pages/main-page/main-page.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { RoutePath, AuthorizationStatus } from '../../const.ts';
+import { RentalOffer } from '../../types/offer.ts';
 
-type AppScreenProps = {
-  offerCardsCount: number;
+type AppPageProps = {
+  offers: RentalOffer[];
 };
 
-function App({ offerCardsCount }: AppScreenProps): JSX.Element {
+function App({ offers}: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={RoutePath.Index}>
-            <Route index element={<MainScreen offerCardsCount={offerCardsCount} />}/>
+            <Route index element={<MainScreen offers={offers}/>}/>
             <Route path={RoutePath.Offer} element={<OfferScreen/>}/>
             <Route
               path={RoutePath.Favorites}

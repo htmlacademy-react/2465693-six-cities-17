@@ -21,7 +21,7 @@ export const offers:RentalOffer[] = [
       'zoom': 16
     },
     'isFavorite': false,
-    'isPremium': false,
+    'isPremium': true,
     'rating': 1.7
   },
   {
@@ -43,7 +43,7 @@ export const offers:RentalOffer[] = [
       'longitude': 2.330499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 2.4
   },
