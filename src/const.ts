@@ -3,7 +3,7 @@ const enum RoutePath {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
-  NotFound = '*'
+  NotFound = '*',
 }
 
 const enum AuthorizationStatus {
@@ -12,4 +12,8 @@ const enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { AuthorizationStatus, RoutePath};
+const LOCATIONS = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+const ONE_STAR_RATING = 100 / 5;
+
+export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING };

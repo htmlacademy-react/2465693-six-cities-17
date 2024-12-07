@@ -1,42 +1,22 @@
-function LocationsList ():JSX.Element {
+import { LOCATIONS } from '../../const';
+import City from '../city/city';
+
+type LocationListType = {
+  activeLocation: string;
+};
+
+function LocationsList({ activeLocation }: LocationListType): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Paris</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Cologne</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Brussels</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item tabs__item--active">
-              <span>Amsterdam</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Hamburg</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Dusseldorf</span>
-            </a>
-          </li>
+          {LOCATIONS.map((location) => (
+            <City key={location} name={location} isActive={activeLocation === location} />
+          ))}
         </ul>
       </section>
     </div>
   );
 }
-
+//(({location}===activeLocation) ? isActive={true} : isActive={false})
 export default LocationsList;
