@@ -2,11 +2,11 @@ import { RentalOffer } from '../types/offer';
 
 export const offerIds: RentalOffer[] = [
   {
-    'id': 'b8c329f9-619c-4ee9-a537-4a88d58c56d8',
-    'title': 'The Pondhouse - A Magical Place',
+    'id': '4dca75c7-04d9-44ae-ada6-1a9d4e075fda',
+    'title': 'Amazing and Extremely Central Flat',
     'description': 'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
     'type': 'apartment',
-    'price': 469,
+    'price': 161,
     'images': [
       'https://16.design.htmlacademy.pro/static/hotel/11.jpg',
       'https://16.design.htmlacademy.pro/static/hotel/14.jpg',
@@ -24,8 +24,8 @@ export const offerIds: RentalOffer[] = [
       }
     },
     'location': {
-      'latitude': 48.858610000000006,
-      'longitude': 2.330499,
+      'latitude': 48.868610000000004,
+      'longitude': 2.342499,
       'zoom': 16
     },
     'goods': [
@@ -40,9 +40,9 @@ export const offerIds: RentalOffer[] = [
       'name': 'Angelina',
       'avatarUrl': 'https://16.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
-    'isPremium': false,
+    'isPremium': true,
     'isFavorite': false,
-    'rating': 2.4,
+    'rating': 1.7,
     'bedrooms': 4,
     'maxAdults': 5
   },
@@ -53,12 +53,12 @@ export const offerIds: RentalOffer[] = [
     'type': 'apartment',
     'price': 469,
     'images': [
-      'https://16.design.htmlacademy.pro/static/hotel/11.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/14.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/13.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/5.jpg',
+      'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
+      'https://16.design.htmlacademy.pro/static/hotel/8.jpg',
+      'https://16.design.htmlacademy.pro/static/hotel/10.jpg',
+      'https://16.design.htmlacademy.pro/static/hotel/25.jpg',
       'https://16.design.htmlacademy.pro/static/hotel/1.jpg',
-      'https://16.design.htmlacademy.pro/static/hotel/19.jpg'
+      'https://16.design.htmlacademy.pro/static/hotel/9.jpg'
     ],
     'city': {
       'name': 'Paris',
@@ -76,7 +76,6 @@ export const offerIds: RentalOffer[] = [
     'goods': [
       'Breakfast',
       'Washing machine',
-      'Dishwasher',
       'Washer',
       'Fridge'
     ],
@@ -85,7 +84,7 @@ export const offerIds: RentalOffer[] = [
       'name': 'Angelina',
       'avatarUrl': 'https://16.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
-    'isPremium': false,
+    'isPremium': true,
     'isFavorite': false,
     'rating': 2.4,
     'bedrooms': 4,
@@ -131,8 +130,8 @@ export const offerIds: RentalOffer[] = [
       'name': 'Angelina',
       'avatarUrl': 'https://16.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
-    'isPremium': false,
-    'isFavorite': false,
+    'isPremium': true,
+    'isFavorite': true,
     'rating': 1.7,
     'bedrooms': 4,
     'maxAdults': 4

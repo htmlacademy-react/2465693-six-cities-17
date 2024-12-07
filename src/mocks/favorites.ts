@@ -1,29 +1,6 @@
 import { RentalOffer } from '../types/offer';
 
-export const offers:RentalOffer[] = [
-  {
-    'id': '4dca75c7-04d9-44ae-ada6-1a9d4e075fda',
-    'title': 'Amazing and Extremely Central Flat',
-    'type': 'apartment',
-    'price': 161,
-    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/18.jpg',
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 48.868610000000004,
-      'longitude': 2.342499,
-      'zoom': 16
-    },
-    'isFavorite': false,
-    'isPremium': true,
-    'rating': 1.7
-  },
+export const favorites:RentalOffer[] = [
   {
     'id': 'b8c329f9-619c-4ee9-a537-4a88d58c56d8',
     'title': 'The Pondhouse - A Magical Place',
@@ -70,27 +47,4 @@ export const offers:RentalOffer[] = [
     'isPremium': true,
     'rating': 1.7
   },
-  {
-    'id': '8867858c-95d1-47fd-8619-f8dab016b8d7',
-    'title': 'Penthouse, 4-5 rooms + 5 balconies',
-    'type': 'room',
-    'price': 182,
-    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/13.jpg',
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 48.85761,
-      'longitude': 2.358499,
-      'zoom': 16
-    },
-    'isFavorite': false,
-    'isPremium': false,
-    'rating': 1.4
-  }
 ];

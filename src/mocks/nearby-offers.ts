@@ -1,6 +1,6 @@
 import { RentalOffer } from '../types/offer';
 
-export const offers:RentalOffer[] = [
+export const nearbyOffers:RentalOffer[] = [
   {
     'id': '4dca75c7-04d9-44ae-ada6-1a9d4e075fda',
     'title': 'Amazing and Extremely Central Flat',
