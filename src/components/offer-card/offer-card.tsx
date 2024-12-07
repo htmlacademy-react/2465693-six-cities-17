@@ -6,13 +6,15 @@ import { getRatingWidth } from '../../utils';
 type OfferCardType = {
   offer: RentalOffer;
   cardType: 'cities';
+  onOfferCardMouseEnter?: () => void;
+  onOfferCardMouseLeave?: () => void;
 };
 
-function OfferCard({ offer, cardType }: OfferCardType): JSX.Element {
+function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLeave }: OfferCardType): JSX.Element {
   const { title, type, price, previewImage, isFavorite, isPremium, rating } = offer;
 
   return (
-    <article className={`${cardType}__card place-card`}>
+    <article className={`${cardType}__card place-card`} onMouseEnter={onOfferCardMouseEnter} onMouseLeave={onOfferCardMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

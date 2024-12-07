@@ -2,12 +2,12 @@ import classNames from 'classnames';
 
 type CityPropsType = {
   name: string;
-  isActive: boolean;
+  isActiveCity: boolean;
 };
 
 function City(CityProps: CityPropsType): JSX.Element {
-  const { name, isActive } = CityProps;
-  const linkClass = classNames('locations__item-link', 'tabs__item', { 'tabs__item--active': isActive });
+  const { name, isActiveCity } = CityProps;
+  const linkClass = classNames('locations__item-link', 'tabs__item', { 'tabs__item--active': isActiveCity });
 
   return (
     <li className="locations__item">

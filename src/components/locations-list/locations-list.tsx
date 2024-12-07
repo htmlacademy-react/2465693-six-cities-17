@@ -11,12 +11,12 @@ function LocationsList({ activeLocation }: LocationListType): JSX.Element {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {LOCATIONS.map((location) => (
-            <City key={location} name={location} isActive={activeLocation === location} />
+            <City key={location} name={location} isActiveCity={activeLocation === location} />
           ))}
         </ul>
       </section>
     </div>
   );
 }
-//(({location}===activeLocation) ? isActive={true} : isActive={false})
+
 export default LocationsList;
