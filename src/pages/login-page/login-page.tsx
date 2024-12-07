@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 
 
-function LoginScreen(): JSX.Element {
+function LoginPage(): JSX.Element {
   const hideNav = true;
   return (
     <div className="page page--gray page--login">
@@ -57,4 +57,4 @@ function LoginScreen(): JSX.Element {
   );
 }
 
-export default LoginScreen;
+export default LoginPage;

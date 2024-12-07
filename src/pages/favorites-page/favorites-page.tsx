@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import { Helmet } from 'react-helmet-async';
 
-function FavoritesScreen(): JSX.Element {
+function FavoritesPage(): JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -189,4 +189,4 @@ function FavoritesScreen(): JSX.Element {
   );
 }
 
-export default FavoritesScreen;
+export default FavoritesPage;

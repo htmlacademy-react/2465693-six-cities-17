@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import Map from '../../components/map/map';
 
-function OfferScreen(): JSX.Element {
+function OfferPage(): JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -453,4 +453,4 @@ function OfferScreen(): JSX.Element {
   );
 }
 
-export default OfferScreen;
+export default OfferPage;

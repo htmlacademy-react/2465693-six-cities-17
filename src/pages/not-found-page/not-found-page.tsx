@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import { Fragment } from 'react';
 
-function NotFoundScreen():JSX.Element{
+function NotFoundPage():JSX.Element{
   const hideNav = true;
   return (
     <Fragment>
@@ -22,4 +22,4 @@ function NotFoundScreen():JSX.Element{
   );
 }
 
-export default NotFoundScreen;
+export default NotFoundPage;

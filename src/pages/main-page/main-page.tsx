@@ -1,20 +1,16 @@
+import OfferCardsList from '../../components/offer-cards-list/offer-cards-list';
 import LocationsList from '../../components/locations-list/locations-list';
-//import OfferCard from '../../components/offer-card/offer-card';
 import Header from '../../components/header/header';
 import Sort from '../../components/sort/sort';
-import { Helmet } from 'react-helmet-async';
 import Map from '../../components/map/map';
+import { Helmet } from 'react-helmet-async';
 import { RentalOffer } from '../../types/offer';
-import OfferCardsList from '../../components/offer-cards-list/offer-cards-list';
 
-type MainScreenProps = {
+type MainPageProps = {
   offers: RentalOffer[];
 };
 
-function MainScreen({ offers }: MainScreenProps): JSX.Element {
-//  const offerCardsList = Array.from({ length: offerCardsCount }, (_, k) => (
-//    <OfferCard key={k} />
-//  ));
+function MainPage({ offers }: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
@@ -43,4 +39,4 @@ function MainScreen({ offers }: MainScreenProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export default MainPage;
