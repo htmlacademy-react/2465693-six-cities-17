@@ -1,19 +1,15 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import { Helmet } from 'react-helmet-async';
-import { getOfferFavoriteGroup } from '../../group-favorites';
 import { RentalOffer } from '../../types/offer';
-import OfferCard from '../../components/offer-card/offer-card';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
-import { RoutePath } from '../../const';
+import FavoriteList from '../../components/favorite-component/favorite-list';
 
 type FavoritesPageType = {
   offers: RentalOffer[];
 };
 
 function FavoritesPage({ offers }: FavoritesPageType): JSX.Element {
-  const offerFavoriteGroup = getOfferFavoriteGroup({ offers });
 
   return (
     <div className={classNames('page', { 'page--favorites-empty': !offers.length })}>
@@ -28,25 +24,7 @@ function FavoritesPage({ offers }: FavoritesPageType): JSX.Element {
             <h1 className={offers.length ? 'favorites__title' : 'visually-hidden'}>
               {offers.length ? 'Saved listing' : 'Favorites (empty)'}
             </h1>
-            <ul className="favorites__list">
-              {Object.entries(offerFavoriteGroup).map(([city, cityOffers]) => (
-                <li className="favorites__locations-items" key={city}>
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-
-                      <Link className="locations__item-link" to={RoutePath.Favorites}>
-                        <span>{city}</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    {cityOffers.map((offer) => (
-                      <OfferCard key={offer.id} offer={offer} cardType="favorites" />
-                    ))}
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <FavoriteList offers={offers} />
           </section>
         </div>
       </main>
