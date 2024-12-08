@@ -27,4 +27,9 @@ const CardImageSize = {
   },
 } as const;
 
-export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize };
+const ComentsLenght = {
+  MIN: 50,
+  MAX: 300,
+};
+
+export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght };
