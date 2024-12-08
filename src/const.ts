@@ -17,11 +17,15 @@ const LOCATIONS = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Duss
 const ONE_STAR_RATING = 100 / 5;
 
 const CardImageSize = {
-  favorites: {
+  'favorites': {
     width: 150,
     height: 110,
   },
-  cities: {
+  'cities': {
+    width: 260,
+    height: 200,
+  },
+  'near-places': {
     width: 260,
     height: 200,
   },

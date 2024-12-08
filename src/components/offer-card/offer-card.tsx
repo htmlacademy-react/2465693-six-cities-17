@@ -8,7 +8,7 @@ import { generatePath } from 'react-router-dom';
 
 type OfferCardType = {
   offer: RentalOffer;
-  cardType: 'cities' | 'favorites';
+  cardType: 'cities' | 'favorites'| 'near-places';
   onOfferCardMouseEnter?: () => void;
   onOfferCardMouseLeave?: () => void;
 };

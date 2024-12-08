@@ -12,16 +12,17 @@ import { RentalOffer } from '../../types/offer.ts';
 type AppPageProps = {
   offers: RentalOffer[];
   favorites: RentalOffer[];
+  nearbyOffers: RentalOffer[];
 };
 
-function App({ offers, favorites }: AppPageProps): JSX.Element {
+function App({ offers, favorites, nearbyOffers }: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={RoutePath.Index}>
             <Route index element={<MainPage offers={offers} />} />
-            <Route path={RoutePath.Offer} element={<OfferPage />} />
+            <Route path={RoutePath.Offer} element={<OfferPage nearbyOffers={nearbyOffers}/>} />
             <Route
               path={RoutePath.Favorites}
               element={
