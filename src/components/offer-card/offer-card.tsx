@@ -4,6 +4,7 @@ import BookmarkButton from '../bookmark-button/bookmark-button';
 import { getRatingWidth } from '../../utils';
 import { CardImageSize, RoutePath } from '../../const';
 import { Link } from 'react-router-dom';
+import { generatePath } from 'react-router-dom';
 
 type OfferCardType = {
   offer: RentalOffer;
@@ -13,7 +14,7 @@ type OfferCardType = {
 };
 
 function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLeave }: OfferCardType): JSX.Element {
-  const { title, type, price, previewImage, isFavorite, isPremium, rating } = offer;
+  const { id, title, type, price, previewImage, isFavorite, isPremium, rating } = offer;
 
   return (
     <article className={`${cardType}__card place-card`} onMouseEnter={onOfferCardMouseEnter} onMouseLeave={onOfferCardMouseLeave}>
@@ -23,7 +24,7 @@ function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLea
         </div>
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={RoutePath.Offer}>
+        <Link to={generatePath(RoutePath.Offer, { id: id })}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -49,7 +50,7 @@ function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLea
         </div>
         <h2 className="place-card__name">
 
-          <Link to={RoutePath.Offer}>{title}</Link>
+          <Link to={generatePath(RoutePath.Offer, { id: id })}>{title}</Link>
         </h2>
         <p className="place-card__type">{capitalizeLetter(type)}</p>
       </div>
