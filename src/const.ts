@@ -16,4 +16,15 @@ const LOCATIONS = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Duss
 
 const ONE_STAR_RATING = 100 / 5;
 
-export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING };
+const CardImageSize = {
+  favorites: {
+    width: 150,
+    height: 110,
+  },
+  cities: {
+    width: 260,
+    height: 200,
+  },
+} as const;
+
+export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize };

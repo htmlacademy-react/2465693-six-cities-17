@@ -2,10 +2,11 @@ import { RentalOffer } from '../../types/offer';
 import { capitalizeLetter } from '../../utils';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import { getRatingWidth } from '../../utils';
+import { CardImageSize } from '../../const';
 
 type OfferCardType = {
   offer: RentalOffer;
-  cardType: 'cities';
+  cardType: 'cities' | 'favorites';
   onOfferCardMouseEnter?: () => void;
   onOfferCardMouseLeave?: () => void;
 };
@@ -22,7 +23,13 @@ function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLea
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+          <img
+            className="place-card__image"
+            src={previewImage}
+            width={CardImageSize[cardType].width}
+            height={CardImageSize[cardType].height}
+            alt="Place image"
+          />
         </a>
       </div>
       <div className="place-card__info">

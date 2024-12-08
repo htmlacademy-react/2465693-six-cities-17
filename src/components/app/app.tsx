@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
 import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
 import OfferPage from '../../pages/offer-page/offer-page.tsx';
@@ -11,26 +11,27 @@ import { RentalOffer } from '../../types/offer.ts';
 
 type AppPageProps = {
   offers: RentalOffer[];
+  favorites: RentalOffer[];
 };
 
-function App({ offers}: AppPageProps): JSX.Element {
+function App({ offers, favorites }: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={RoutePath.Index}>
-            <Route index element={<MainPage offers={offers}/>}/>
-            <Route path={RoutePath.Offer} element={<OfferPage/>}/>
+            <Route index element={<MainPage offers={offers} />} />
+            <Route path={RoutePath.Offer} element={<OfferPage />} />
             <Route
               path={RoutePath.Favorites}
               element={
-                <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
-                  <FavoritesPage/>
+                <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                  <FavoritesPage offers={favorites} />
                 </PrivateRoute>
               }
             />
-            <Route path={RoutePath.Login} element={<LoginPage/>}/>
-            <Route path={RoutePath.NotFound} element={<NotFoundPage/>}/>
+            <Route path={RoutePath.Login} element={<LoginPage />} />
+            <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
