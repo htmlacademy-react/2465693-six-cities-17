@@ -4,6 +4,6 @@ import { ONE_STAR_RATING } from './const';
 const capitalizeLetter = (word: string) => word[0].toUpperCase() + word.slice(1);
 
 //Функция расчета значения ширины рэйтинга
-const getRatingWidth = (value: number) => value * ONE_STAR_RATING;
+const getRatingWidth = (value: number) => Math.round(value) * ONE_STAR_RATING;
 
 export { capitalizeLetter, getRatingWidth };

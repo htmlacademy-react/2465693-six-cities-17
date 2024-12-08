@@ -24,7 +24,7 @@ function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLea
         </div>
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={generatePath(RoutePath.Offer, { id: id })}>
+        <Link to={generatePath(RoutePath.Offer, {id})}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -50,7 +50,7 @@ function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLea
         </div>
         <h2 className="place-card__name">
 
-          <Link to={generatePath(RoutePath.Offer, { id: id })}>{title}</Link>
+          <Link to={generatePath(RoutePath.Offer, {id})}>{title}</Link>
         </h2>
         <p className="place-card__type">{capitalizeLetter(type)}</p>
       </div>
