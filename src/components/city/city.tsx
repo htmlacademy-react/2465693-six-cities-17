@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 type CityPropsType = {
   name: string;
@@ -11,9 +12,10 @@ function City(CityProps: CityPropsType): JSX.Element {
 
   return (
     <li className="locations__item">
-      <a className={linkClass}>
+      {/* поправить ссылку */}
+      <Link className={linkClass} to=''>
         <span>{name}</span>
-      </a>
+      </Link>
     </li>
   );
 }

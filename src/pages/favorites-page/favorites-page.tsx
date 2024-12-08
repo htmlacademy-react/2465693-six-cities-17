@@ -5,6 +5,8 @@ import { getOfferFavoriteGroup } from '../../group-favorites';
 import { RentalOffer } from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { RoutePath } from '../../const';
 
 type FavoritesPageType = {
   offers: RentalOffer[];
@@ -31,9 +33,10 @@ function FavoritesPage({ offers }: FavoritesPageType): JSX.Element {
                 <li className="favorites__locations-items" key={city}>
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
-                      <a className="locations__item-link" href="#">
+
+                      <Link className="locations__item-link" to={RoutePath.Favorites}>
                         <span>{city}</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="favorites__places">
