@@ -1,35 +1,38 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
-import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import OfferScreen from '../../pages/offer-screen/offer-screen';
-import LoginScreen from '../../pages/login-screen/login-screen';
-import MainScreen from '../../pages/main-screen/main-screen';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
+import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
+import OfferPage from '../../pages/offer-page/offer-page.tsx';
+import LoginPage from '../../pages/login-page/login-page.tsx';
+import MainPage from '../../pages/main-page/main-page.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { RoutePath, AuthorizationStatus } from '../../const.ts';
+import { RentalOffer } from '../../types/offer.ts';
 
-type AppScreenProps = {
-  offerCardsCount: number;
+type AppPageProps = {
+  offers: RentalOffer[];
+  favorites: RentalOffer[];
+  nearbyOffers: RentalOffer[];
 };
 
-function App({ offerCardsCount }: AppScreenProps): JSX.Element {
+function App({ offers, favorites, nearbyOffers }: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={RoutePath.Index}>
-            <Route index element={<MainScreen offerCardsCount={offerCardsCount} />}/>
-            <Route path={RoutePath.Offer} element={<OfferScreen/>}/>
+            <Route index element={<MainPage offers={offers} />} />
+            <Route path={RoutePath.Offer} element={<OfferPage nearbyOffers={nearbyOffers}/>} />
             <Route
               path={RoutePath.Favorites}
               element={
-                <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
-                  <FavoritesScreen/>
+                <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                  <FavoritesPage offers={favorites} />
                 </PrivateRoute>
               }
             />
-            <Route path={RoutePath.Login} element={<LoginScreen/>}/>
-            <Route path={RoutePath.NotFound} element={<NotFoundScreen/>}/>
+            <Route path={RoutePath.Login} element={<LoginPage />} />
+            <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
