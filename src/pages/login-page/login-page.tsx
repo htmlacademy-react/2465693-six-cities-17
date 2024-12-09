@@ -2,14 +2,14 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 
 
-function LoginScreen(): JSX.Element {
-  const isHeaderNav = false;
+function LoginPage(): JSX.Element {
+  const hideNav = true;
   return (
     <div className="page page--gray page--login">
       <Helmet>
         <title>6 городов. Добро пожаловать!</title>
       </Helmet>
-      <Header isHeaderNav = {isHeaderNav} />
+      <Header hideNav = {hideNav} />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -57,4 +57,4 @@ function LoginScreen(): JSX.Element {
   );
 }
 
-export default LoginScreen;
+export default LoginPage;
