@@ -14,7 +14,7 @@ function FormRating({value, title, fieldChangeHandle}: FormRatingType):JSX.Eleme
         value={value}
         id={`${value}-stars`}
         type="radio"
-        onClick={({currentTarget}) => fieldChangeHandle(currentTarget.name, value)}
+        onChange={({currentTarget}) => fieldChangeHandle(currentTarget.name, value)}
       />
       <label
         htmlFor={`${value}-stars`}

@@ -12,10 +12,10 @@ function City(CityProps: CityPropsType): JSX.Element {
 
   return (
     <li className="locations__item">
-      {/* поправить ссылку */}
-      <Link className={linkClass} to=''>
+      {/* При нажатии (cобытие onClick) будет срабатывать логика смены фильтра списка по городу. */}
+      <a className={linkClass} >
         <span>{name}</span>
-      </Link>
+      </a>
     </li>
   );
 }

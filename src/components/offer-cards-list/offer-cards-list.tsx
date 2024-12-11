@@ -12,7 +12,7 @@ function OfferCardsList({ offers }: OfferCardsListType): JSX.Element {
     setActiveOfferCardId(id);
   };
   const offerCardMouseLeaveHandler = (): void => {
-    setActiveOfferCardId(null);
+    setActiveOfferCardId('');
   };
 
   return (
@@ -25,9 +25,7 @@ function OfferCardsList({ offers }: OfferCardsListType): JSX.Element {
           onOfferCardMouseEnter={() => {
             offerCardMouseEnterHandler(offer.id);
           }}
-          onOfferCardMouseLeave={() => {
-            offerCardMouseLeaveHandler();
-          }}
+          onOfferCardMouseLeave={offerCardMouseLeaveHandler}
         />
       ))}
     </div>

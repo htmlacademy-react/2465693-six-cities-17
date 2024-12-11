@@ -50,7 +50,7 @@ function FormComment():JSX.Element{
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onInput={(({currentTarget}) => {
+        onChange={(({currentTarget}) => {
           fieldChangeHandle(currentTarget.name, currentTarget.value);
         })}
         value={formData.review}
@@ -66,7 +66,7 @@ function FormComment():JSX.Element{
           className="reviews__submit form__submit button"
           type="submit"
           disabled={
-            (formData.review.length <= ComentsLenght.MIN || formData.review.length >= ComentsLenght.MAX) && formData.rating === 0
+            (formData.review.length <= ComentsLenght.MIN || formData.review.length >= ComentsLenght.MAX) || formData.rating === 0
           }
         >
           Submit

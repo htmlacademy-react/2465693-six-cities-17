@@ -14,7 +14,7 @@ function Header ({hideNav = false}: HeaderNavProps):JSX.Element {
           <div className="header__left">
             <HeaderLogo/>
           </div>
-          {!hideNav && <HeaderNav/>}
+          {hideNav || <HeaderNav/>}
         </div>
       </div>
     </header>

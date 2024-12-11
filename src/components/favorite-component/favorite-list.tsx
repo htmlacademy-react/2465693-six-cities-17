@@ -21,10 +21,10 @@ function FavoriteList({offers}: FavoriteListType): JSX.Element {
         <li className="favorites__locations-items" key={city}>
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
-
-              <Link className="locations__item-link" to={RoutePath.Favorites}>
+              {/* При нажатии (cобытие onClick) будет срабатывать логика смены фильтра списка по городу. */}
+              <a className="locations__item-link" >
                 <span>{city}</span>
-              </Link>
+              </a>
             </div>
           </div>
           <div className="favorites__places">
