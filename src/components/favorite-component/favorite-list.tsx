@@ -1,15 +1,13 @@
-import { RoutePath } from '../../const';
-import { Link } from 'react-router-dom';
 import OfferCard from '../offer-card/offer-card';
 import { RentalOffer } from '../../types/offer';
 import FavoriteEmpty from './favorite-empty';
-
 import { getOfferFavoriteGroup } from '../../group-favorites';
-type FavoriteListType = {
+
+type FavoriteListProps = {
   offers: RentalOffer[];
 }
 
-function FavoriteList({offers}: FavoriteListType): JSX.Element {
+function FavoriteList({offers}: FavoriteListProps): JSX.Element {
   const offerFavoriteGroup = getOfferFavoriteGroup({ offers });
   if (!offers.length) {
     return <FavoriteEmpty/>;

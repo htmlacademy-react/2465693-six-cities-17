@@ -1,12 +1,11 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 
-type CityPropsType = {
+type CityPropsProps = {
   name: string;
   isActiveCity: boolean;
 };
 
-function City(CityProps: CityPropsType): JSX.Element {
+function City(CityProps: CityPropsProps): JSX.Element {
   const { name, isActiveCity } = CityProps;
   const linkClass = classNames('locations__item-link', 'tabs__item', { 'tabs__item--active': isActiveCity });
 

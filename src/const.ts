@@ -36,4 +36,10 @@ const ComentsLenght = {
   MAX: 300,
 };
 
-export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght };
+const URL_MARKER_DEFAULT =
+  '../markup/img/pin.svg';
+
+const URL_MARKER_CURRENT =
+  '../markup/img/pin-active.svg';
+
+export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, URL_MARKER_DEFAULT, URL_MARKER_CURRENT };

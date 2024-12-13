@@ -5,11 +5,11 @@ import { RentalOffer } from '../../types/offer';
 import classNames from 'classnames';
 import FavoriteList from '../../components/favorite-component/favorite-list';
 
-type FavoritesPageType = {
+type FavoritesPageProps = {
   offers: RentalOffer[];
 };
 
-function FavoritesPage({ offers }: FavoritesPageType): JSX.Element {
+function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
 
   return (
     <div className={classNames('page', { 'page--favorites-empty': !offers.length })}>

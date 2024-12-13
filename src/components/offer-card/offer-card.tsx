@@ -2,22 +2,24 @@ import { RentalOffer } from '../../types/offer';
 import { capitalizeLetter } from '../../utils';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import { getRatingWidth } from '../../utils';
+import Map from '../map/map';
 import { CardImageSize, RoutePath } from '../../const';
 import { Link } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 
-type OfferCardType = {
+type OfferCardProps = {
   offer: RentalOffer;
   cardType: 'cities' | 'favorites'| 'near-places';
-  onOfferCardMouseEnter?: () => void;
+  onOfferCardMouseEnter?: (id: string) => void;
   onOfferCardMouseLeave?: () => void;
 };
 
-function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLeave }: OfferCardType): JSX.Element {
+function OfferCard({ offer, cardType, onOfferCardMouseEnter = () => {}, onOfferCardMouseLeave }: OfferCardProps): JSX.Element {
   const { id, title, type, price, previewImage, isFavorite, isPremium, rating } = offer;
 
   return (
-    <article className={`${cardType}__card place-card`} onMouseEnter={onOfferCardMouseEnter} onMouseLeave={onOfferCardMouseLeave}>
+
+    <article className={`${cardType}__card place-card`} onMouseEnter={() => onOfferCardMouseEnter(offer.id)} onMouseLeave={onOfferCardMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

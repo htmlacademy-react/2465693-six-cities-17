@@ -1,15 +1,14 @@
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import Map from '../../components/map/map';
 import FormComment from '../../components/form-comment/form-comment';
 import { RentalOffer } from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
 
-type OfferPageType = {
+type OfferPageProps = {
   nearbyOffers: RentalOffer[];
 }
 
-function OfferPage({nearbyOffers}: OfferPageType): JSX.Element {
+function OfferPage({nearbyOffers}: OfferPageProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -188,7 +187,7 @@ function OfferPage({nearbyOffers}: OfferPageType): JSX.Element {
               </section>
             </div>
           </div>
-          <Map className={'offer__map'} />
+          {/* <Map className={'offer__map'} /> */}
         </section>
         <div className="container">
           <section className="near-places places">

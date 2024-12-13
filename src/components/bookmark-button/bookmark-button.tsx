@@ -1,11 +1,11 @@
 
 import classNames from 'classnames';
 
-type BookmarkButtonType = {
+type BookmarkButtonProps = {
   isFavorite: boolean;
 }
 
-function BookmarkButton ({isFavorite}:BookmarkButtonType):JSX.Element {
+function BookmarkButton ({isFavorite}:BookmarkButtonProps):JSX.Element {
   const buttonClass = classNames('place-card__bookmark-button', {'place-card__bookmark-button--active':isFavorite}, 'button');
 
   return (

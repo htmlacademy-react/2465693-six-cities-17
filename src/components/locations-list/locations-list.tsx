@@ -1,11 +1,11 @@
 import { LOCATIONS } from '../../const';
 import City from '../city/city';
 
-type LocationListType = {
+type LocationListProps = {
   activeLocation: string;
 };
 
-function LocationsList({ activeLocation }: LocationListType): JSX.Element {
+function LocationsList({ activeLocation }: LocationListProps): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
