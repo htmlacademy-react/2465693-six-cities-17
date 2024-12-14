@@ -1,6 +1,7 @@
+import { MapSetting } from '../const';
 import { Map, TileLayer } from 'leaflet';
+import { CityOffer } from '../types/offer';
 import {useEffect, useState, useRef, MutableRefObject} from 'react';
-import { CityOffer } from '../../types/offer';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: CityOffer):Map|null {
   const [map, setMap] = useState<Map|null>(null);
@@ -17,9 +18,9 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: CityOffer):M
       });
 
       const layer = new TileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+        MapSetting.URL,
         {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          attribution: MapSetting.Atribution,
         }
       );
       instance.addLayer(layer);

@@ -1,26 +1,26 @@
-import { Icon, Marker, layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { RentalOffer } from '../../types/offer';
 import {useRef, useEffect} from 'react';
-import useMap from '../hooks/use-map';
+import useMap from '../../hooks/use-map';
+import { Icon, Marker, layerGroup } from 'leaflet';
+import { RentalOffer, SelectedRentalOffer } from '../../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapProps ={
   className: string;
-  offers: RentalOffer[];
-  selectedOffer: RentalOffer | undefined;
+  offers: (RentalOffer|SelectedRentalOffer)[];
+  selectedOffer: RentalOffer|SelectedRentalOffer|undefined;
 };
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [27, 39],
-  iconAnchor: [40, 40]
+  iconAnchor: [14, 39]
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
   iconSize: [27, 39],
-  iconAnchor: [40, 40]
+  iconAnchor: [14, 39]
 });
 
 function Map ({className, offers, selectedOffer} : MapProps):JSX.Element {

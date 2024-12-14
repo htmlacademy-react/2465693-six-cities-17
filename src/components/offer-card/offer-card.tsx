@@ -2,7 +2,6 @@ import { RentalOffer } from '../../types/offer';
 import { capitalizeLetter } from '../../utils';
 import BookmarkButton from '../bookmark-button/bookmark-button';
 import { getRatingWidth } from '../../utils';
-import Map from '../map/map';
 import { CardImageSize, RoutePath } from '../../const';
 import { Link } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
@@ -42,7 +41,7 @@ function OfferCard({ offer, cardType, onOfferCardMouseEnter = () => {}, onOfferC
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton isFavorite={isFavorite} />
+          <BookmarkButton isFavorite={isFavorite} pageType={'place-card'}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

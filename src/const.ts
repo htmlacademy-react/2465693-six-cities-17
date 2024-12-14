@@ -42,4 +42,24 @@ const URL_MARKER_DEFAULT =
 const URL_MARKER_CURRENT =
   '../markup/img/pin-active.svg';
 
-export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, URL_MARKER_DEFAULT, URL_MARKER_CURRENT };
+const NUMBER_OF_REVIEW = 10;
+
+const NUMBER_NEARBY_OFFER = 3;
+
+const BookmarkButtonSize = {
+  'place-card': {
+    width: 18,
+    height: 19
+  },
+  'offer': {
+    width: 31,
+    height: 33
+  },
+};
+
+const enum MapSetting {
+  URL= 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  Atribution= '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+}
+
+export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting};

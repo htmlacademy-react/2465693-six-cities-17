@@ -1,10 +1,10 @@
 import { OfferReview } from '../types/review';
 
-export const Reviews: OfferReview[] = [
+export const reviews: OfferReview[] = [
   {
     'id': '54a4dbfc-fdac-4a1d-b8ff-08488b476aed',
     'comment': 'What an amazing view! The house is stunning and in an amazing location. The large glass wall had an amazing view of the river!',
-    'date': '2024-11-12T21:00:00.486Z',
+    'date': '2024-07-12T21:00:00.486Z',
     'rating': 1,
     'user': {
       'name': 'Corey',
@@ -26,7 +26,7 @@ export const Reviews: OfferReview[] = [
   {
     'id': 'fcfa08d8-39cf-45ee-9958-58fea5f9672a',
     'comment': 'The room was spacious and clean. The pool looked nothing like the photos and desparately needs a clean. The sauna and spa were closed for lunar new year holiday.',
-    'date': '2024-11-09T21:00:00.486Z',
+    'date': '2024-12-09T21:00:00.486Z',
     'rating': 2,
     'user': {
       'name': 'Zak',
@@ -37,7 +37,7 @@ export const Reviews: OfferReview[] = [
   {
     'id': '21745c64-7727-40ee-ab48-80e29ebc5625',
     'comment': 'We loved it so much, the house, the veiw, the location just great.. Highly reccomend :)',
-    'date': '2024-11-06T21:00:00.486Z',
+    'date': '2024-03-06T21:00:00.486Z',
     'rating': 1,
     'user': {
       'name': 'Sophie',
@@ -48,7 +48,7 @@ export const Reviews: OfferReview[] = [
   {
     'id': '7fe23c59-9605-434d-be0a-c45f806da659',
     'comment': 'What an amazing view! The house is stunning and in an amazing location. The large glass wall had an amazing view of the river!',
-    'date': '2024-11-13T21:00:00.486Z',
+    'date': '2024-05-13T21:00:00.486Z',
     'rating': 1,
     'user': {
       'name': 'Jack',
