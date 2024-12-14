@@ -7,14 +7,14 @@ import MainPage from '../../pages/main-page/main-page.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { RoutePath, AuthorizationStatus } from '../../const.ts';
-import { RentalOffer } from '../../types/offer.ts';
+import { RentalOffer, SelectedRentalOffer } from '../../types/offer.ts';
 import { OfferReview } from '../../types/review.ts';
 
 type AppPageProps = {
   offers: RentalOffer[];
   favorites: RentalOffer[];
   nearbyOffers: RentalOffer[];
-  offerIds: RentalOffer[];
+  offerIds: SelectedRentalOffer[];
   reviews: OfferReview[];
 };
 
