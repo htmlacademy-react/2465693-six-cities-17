@@ -8,7 +8,7 @@ import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 type MapProps ={
   className: string;
   offers: (RentalOffer|SelectedRentalOffer)[];
-  selectedOffer: RentalOffer|SelectedRentalOffer|undefined;
+  selectedOffer?: RentalOffer|SelectedRentalOffer;
 };
 
 const defaultCustomIcon = new Icon({
