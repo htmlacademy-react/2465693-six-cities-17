@@ -5,13 +5,13 @@ import { Fragment } from 'react';
 import { RoutePath } from '../../const';
 
 function NotFoundPage():JSX.Element{
-  const hideNav = true;
+
   return (
     <Fragment>
       <Helmet>
         <title>6 городов. Станица не найдена</title>
       </Helmet>
-      <Header hideNav = {hideNav} />
+      <Header hideNav/>
       <main className="page__main">
         <div className="container">
           <h1 style={{fontSize: '138px'}}>404</h1>

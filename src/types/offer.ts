@@ -18,18 +18,30 @@ export type HostType = {
 export type RentalOffer = {
   id: string;
   title: string;
-  description?: string;
   type: string;
   price: number;
-  images?: string[];
-  previewImage?: string;
+  previewImage: string;
   city: CityOffer;
   location: LocationOffer;
-  goods?: string[];
-  host?: HostType;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  bedrooms?: number;
-  maxAdults?: number;
+};
+
+export type SelectedRentalOffer = {
+  id: string;
+  title: string;
+  description: string;
+  type: string;
+  price: number;
+  images: string[];
+  city: CityOffer;
+  location: LocationOffer;
+  goods: string[];
+  host: HostType;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  bedrooms: number;
+  maxAdults: number;
 };

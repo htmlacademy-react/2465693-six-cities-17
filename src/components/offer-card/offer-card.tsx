@@ -6,18 +6,19 @@ import { CardImageSize, RoutePath } from '../../const';
 import { Link } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 
-type OfferCardType = {
+type OfferCardProps = {
   offer: RentalOffer;
   cardType: 'cities' | 'favorites'| 'near-places';
-  onOfferCardMouseEnter?: () => void;
+  onOfferCardMouseEnter?: (id: string) => void;
   onOfferCardMouseLeave?: () => void;
 };
 
-function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLeave }: OfferCardType): JSX.Element {
+function OfferCard({ offer, cardType, onOfferCardMouseEnter = () => {}, onOfferCardMouseLeave }: OfferCardProps): JSX.Element {
   const { id, title, type, price, previewImage, isFavorite, isPremium, rating } = offer;
 
   return (
-    <article className={`${cardType}__card place-card`} onMouseEnter={onOfferCardMouseEnter} onMouseLeave={onOfferCardMouseLeave}>
+
+    <article className={`${cardType}__card place-card`} onMouseEnter={() => onOfferCardMouseEnter(offer.id)} onMouseLeave={onOfferCardMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -40,7 +41,7 @@ function OfferCard({ offer, cardType, onOfferCardMouseEnter, onOfferCardMouseLea
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton isFavorite={isFavorite} />
+          <BookmarkButton isFavorite={isFavorite} pageType={'place-card'}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -1,15 +1,13 @@
-import { RoutePath } from '../../const';
-import { Link } from 'react-router-dom';
 import OfferCard from '../offer-card/offer-card';
 import { RentalOffer } from '../../types/offer';
 import FavoriteEmpty from './favorite-empty';
-
 import { getOfferFavoriteGroup } from '../../group-favorites';
-type FavoriteListType = {
+
+type FavoriteListProps = {
   offers: RentalOffer[];
 }
 
-function FavoriteList({offers}: FavoriteListType): JSX.Element {
+function FavoriteList({offers}: FavoriteListProps): JSX.Element {
   const offerFavoriteGroup = getOfferFavoriteGroup({ offers });
   if (!offers.length) {
     return <FavoriteEmpty/>;
@@ -21,10 +19,10 @@ function FavoriteList({offers}: FavoriteListType): JSX.Element {
         <li className="favorites__locations-items" key={city}>
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
-
-              <Link className="locations__item-link" to={RoutePath.Favorites}>
+              {/* При нажатии (cобытие onClick) будет срабатывать логика смены фильтра списка по городу. */}
+              <a className="locations__item-link" >
                 <span>{city}</span>
-              </Link>
+              </a>
             </div>
           </div>
           <div className="favorites__places">

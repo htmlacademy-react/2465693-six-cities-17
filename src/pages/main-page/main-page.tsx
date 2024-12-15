@@ -5,6 +5,7 @@ import Sort from '../../components/sort/sort';
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { RentalOffer } from '../../types/offer';
+import { useState } from 'react';
 
 type MainPageProps = {
   offers: RentalOffer[];
@@ -12,6 +13,14 @@ type MainPageProps = {
 
 function MainPage({ offers }: MainPageProps): JSX.Element {
   const activeLocation = 'Paris';
+  const [activeOfferCardId, setActiveOfferCardId] = useState<string | null>('');
+  const offerCardMouseEnterHandler = (id: string): void => {
+    setActiveOfferCardId(id);
+  };
+  const offerCardMouseLeaveHandler = (): void => {
+    setActiveOfferCardId(null);
+  };
+  const selectedOffer = offers.find((offer) => offer.id === activeOfferCardId);
 
   return (
     <div className="page page--gray page--main">
@@ -28,10 +37,10 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sort />
-              <OfferCardsList offers={offers} />;
+              <OfferCardsList offers={offers} onOfferCardMouseEnterHandler={offerCardMouseEnterHandler} onOfferCardMouseLeaveHandler={offerCardMouseLeaveHandler} />;
             </section>
             <div className="cities__right-section">
-              <Map className={'cities__map'} />
+              <Map className={'cities__map'} offers={offers} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>

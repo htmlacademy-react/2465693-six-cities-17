@@ -1,7 +1,7 @@
-import { RentalOffer } from '../types/offer';
+import { SelectedRentalOffer} from '../types/offer';
 
-export const offerIds: RentalOffer[] = [
-  {
+export const offerIds: SelectedRentalOffer[] =
+  [{
     'id': '4dca75c7-04d9-44ae-ada6-1a9d4e075fda',
     'title': 'Amazing and Extremely Central Flat',
     'description': 'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
@@ -84,7 +84,7 @@ export const offerIds: RentalOffer[] = [
       'name': 'Angelina',
       'avatarUrl': 'https://16.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
-    'isPremium': true,
+    'isPremium': false,
     'isFavorite': false,
     'rating': 2.4,
     'bedrooms': 4,
@@ -185,4 +185,4 @@ export const offerIds: RentalOffer[] = [
     'bedrooms': 1,
     'maxAdults': 2
   }
-];
+  ];

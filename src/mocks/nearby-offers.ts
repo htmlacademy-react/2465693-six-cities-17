@@ -69,5 +69,28 @@ export const nearbyOffers:RentalOffer[] = [
     'isFavorite': true,
     'isPremium': true,
     'rating': 1.7
+  },
+  {
+    'id': '8867858c-95d1-47fd-8619-f8dab016b8d7',
+    'title': 'Penthouse, 4-5 rooms + 5 balconies',
+    'type': 'room',
+    'price': 182,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/13.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 48.85761,
+      'longitude': 2.358499,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 1.4
   }
 ];
