@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 
-type CityPropsProps = {
+type CityProps = {
   name: string;
   isActiveCity: boolean;
 };
 
-function City(CityProps: CityPropsProps): JSX.Element {
+function City(CityProps: CityProps): JSX.Element {
   const { name, isActiveCity } = CityProps;
   const linkClass = classNames('locations__item-link', 'tabs__item', { 'tabs__item--active': isActiveCity });
 
