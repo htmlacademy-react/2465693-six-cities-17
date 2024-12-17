@@ -56,7 +56,9 @@ function OfferPage({nearbyOffers, offersIds, reviews}: OfferPageProps): JSX.Elem
                 <h1 className="offer__name">
                   {selectedOffer.title}
                 </h1>
+
                 <BookmarkButton isFavorite={selectedOffer.isFavorite} pageType={'offer'}/>
+
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -84,6 +86,7 @@ function OfferPage({nearbyOffers, offersIds, reviews}: OfferPageProps): JSX.Elem
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <OfferInsideList goods={selectedOffer.goods}/>
               </div>
+
               <OfferHost host={selectedOffer.host} description={selectedOffer.description}/>
 
               <section className="offer__reviews reviews">
@@ -97,7 +100,9 @@ function OfferPage({nearbyOffers, offersIds, reviews}: OfferPageProps): JSX.Elem
               </section>
             </div>
           </div>
+
           <Map className={'offer__map'} offers={offers} selectedOffer={selectedOffer}/>
+
         </section>
         <div className="container">
           <section className="near-places places">
