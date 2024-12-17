@@ -66,7 +66,7 @@ function FormComment():JSX.Element{
           className="reviews__submit form__submit button"
           type="submit"
           disabled={
-            (formData.review.length <= ComentsLenght.MIN || formData.review.length >= ComentsLenght.MAX) || formData.rating === 0
+            (formData.review.length <= ComentsLenght.MIN || formData.review.length >= ComentsLenght.MAX) || !formData.rating
           }
         >
           Submit
