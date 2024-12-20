@@ -8,14 +8,17 @@ import { offerIds } from './mocks/offer-id';
 import { reviews } from './mocks/reviews';
 import { store } from './store';
 import { Provider } from 'react-redux';
+import { loadOffers } from './store/action';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
+store.dispatch(loadOffers(offers));
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App offers={offers} favorites={favorites} nearbyOffers={nearbyOffers} offerIds={offerIds} reviews={reviews}/>
+      <App favorites={favorites} nearbyOffers={nearbyOffers} offerIds={offerIds} reviews={reviews}/>
     </Provider>
   </React.StrictMode>
 );

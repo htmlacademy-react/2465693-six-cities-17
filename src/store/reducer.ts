@@ -1,13 +1,26 @@
-import { LOCATIONS } from '../const';
+import { DEFAULT_CITY} from '../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { offers } from '../mocks/offers';
 import { changeCity, loadOffers } from './action';
+import { RentalOffer } from '../types/offer';
 
-const initialState = {
-  city: LOCATIONS[0],
-  offers: offers.filter((item)=> item.city.name === LOCATIONS[0]),
+type InitialState = {
+  city: string;
+  offers: RentalOffer[];
 };
 
-const reducer = createReducer(initialState, ()=> { });
+const initialState: InitialState = {
+  city: DEFAULT_CITY,
+  offers: [],
+};
+
+const reducer = createReducer(initialState, (builder)=> {
+  builder
+    .addCase(changeCity, (state, action) =>{
+      state.city = action.payload;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+    });
+});
 
 export {reducer};

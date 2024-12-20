@@ -4,15 +4,17 @@ import Header from '../../components/header/header';
 import Sort from '../../components/sort/sort';
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
-import { RentalOffer } from '../../types/offer';
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeCity } from '../../store/action';
 
-type MainPageProps = {
-  offers: RentalOffer[];
-};
+function MainPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const activeLocation = useAppSelector((state)=> state.city);
 
-function MainPage({ offers }: MainPageProps): JSX.Element {
-  const activeLocation = 'Paris';
+  const offers = useAppSelector((state)=>state.offers);
+  const currentCityOffers = offers.filter((offer)=> offer.city.name === activeLocation);
+
   const [activeOfferCardId, setActiveOfferCardId] = useState<string | null>('');
   const offerCardMouseEnterHandler = (id: string): void => {
     setActiveOfferCardId(id);
@@ -20,7 +22,7 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
   const offerCardMouseLeaveHandler = (): void => {
     setActiveOfferCardId(null);
   };
-  const selectedOffer = offers.find((offer) => offer.id === activeOfferCardId);
+  const selectedOffer = currentCityOffers.find((offer) => offer.id === activeOfferCardId);
 
   return (
     <div className="page page--gray page--main">
@@ -30,17 +32,18 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <LocationsList activeLocation={activeLocation} />
+        <LocationsList activeLocation={activeLocation} clickHandler={(city: string) => dispatch(changeCity(city))}/>
         <div className="cities">
           <div className="cities__places-container container">
+
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{currentCityOffers.length} places to stay in {activeLocation}</b>
               <Sort />
-              <OfferCardsList offers={offers} onOfferCardMouseEnterHandler={offerCardMouseEnterHandler} onOfferCardMouseLeaveHandler={offerCardMouseLeaveHandler} />;
+              <OfferCardsList offers={currentCityOffers} onOfferCardMouseEnterHandler={offerCardMouseEnterHandler} onOfferCardMouseLeaveHandler={offerCardMouseLeaveHandler} />;
             </section>
             <div className="cities__right-section">
-              <Map className={'cities__map'} offers={offers} selectedOffer={selectedOffer}/>
+              <Map className={'cities__map'} offers={currentCityOffers} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>

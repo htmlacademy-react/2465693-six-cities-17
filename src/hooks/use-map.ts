@@ -7,6 +7,16 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: CityOffer):M
   const [map, setMap] = useState<Map|null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
+  //перенос фокуса карты на новый выбранный город
+  useEffect(()=> {
+    if (map) {
+      map.flyTo({
+        lat: city.location.latitude,
+        lng: city.location.longitude,
+      });
+    }
+  }, [city, map]);
+
   useEffect(()=>{
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {

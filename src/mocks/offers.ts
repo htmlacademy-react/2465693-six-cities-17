@@ -92,5 +92,98 @@ export const offers:RentalOffer[] = [
     'isFavorite': false,
     'isPremium': false,
     'rating': 1.4
+  },
+
+  {
+    'id': 'c5c6d413-303a-437c-b7ae-297922c3b5a6',
+    'title': 'Amazing and Extremely Central Flat',
+    'type': 'apartment',
+    'price': 294,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/18.jpg',
+    'city': {
+      'name': 'Cologne',
+      'location': {
+        'latitude': 50.938361,
+        'longitude': 6.959974,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 50.932361,
+      'longitude': 6.937974,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 4.9
+  },
+  {
+    'id': '7003428c-7d9c-4c5f-bd23-b88fbccf2523',
+    'title': 'The house among olive ',
+    'type': 'house',
+    'price': 682,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/20.jpg',
+    'city': {
+      'name': 'Cologne',
+      'location': {
+        'latitude': 50.938361,
+        'longitude': 6.959974,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 50.934361,
+      'longitude': 6.943974,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 2.9
+  },
+  {
+    'id': '4eca4951-8aae-4cfe-b881-5b324ed116fa',
+    'title': 'Canal View Prinsengracht',
+    'type': 'room',
+    'price': 162,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/1.jpg',
+    'city': {
+      'name': 'Cologne',
+      'location': {
+        'latitude': 50.938361,
+        'longitude': 6.959974,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 50.947361,
+      'longitude': 6.9799739999999995,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 4.4
+  },
+  {
+    'id': '530eff64-b7b2-4b3c-93fa-099017cd1cbc',
+    'title': 'Canal View Prinsengracht',
+    'type': 'apartment',
+    'price': 218,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/11.jpg',
+    'city': {
+      'name': 'Cologne',
+      'location': {
+        'latitude': 50.938361,
+        'longitude': 6.959974,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 50.960361,
+      'longitude': 6.967974,
+      'zoom': 16
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 3.6
   }
 ];

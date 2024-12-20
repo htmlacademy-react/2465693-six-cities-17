@@ -62,4 +62,6 @@ const enum MapSetting {
   Atribution= '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 }
 
-export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting};
+const DEFAULT_CITY = LOCATIONS[0];
+
+export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, DEFAULT_CITY };
