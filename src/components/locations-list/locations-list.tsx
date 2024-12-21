@@ -1,5 +1,4 @@
 import { LOCATIONS } from '../../const';
-
 import City from '../city/city';
 
 

@@ -64,4 +64,11 @@ const enum MapSetting {
 
 const DEFAULT_CITY = LOCATIONS[0];
 
-export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, DEFAULT_CITY };
+enum SortOption {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRated = 'Top rated first',
+}
+
+export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, DEFAULT_CITY, SortOption };
