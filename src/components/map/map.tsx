@@ -3,7 +3,7 @@ import {useRef, useEffect} from 'react';
 import useMap from '../../hooks/use-map';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import { RentalOffer, SelectedRentalOffer } from '../../types/offer';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
+import { MarkerSetting } from '../../const';
 
 type MapProps ={
   className: string;
@@ -12,15 +12,15 @@ type MapProps ={
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [27, 39],
-  iconAnchor: [14, 39]
+  iconUrl: MarkerSetting.UrlDefault,
+  iconSize: [MarkerSetting.Width, MarkerSetting.Height],
+  iconAnchor: [MarkerSetting.Left, MarkerSetting.Top]
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [27, 39],
-  iconAnchor: [14, 39]
+  iconUrl: MarkerSetting.UrlActive,
+  iconSize: [MarkerSetting.Width, MarkerSetting.Height],
+  iconAnchor: [MarkerSetting.Left, MarkerSetting.Top]
 });
 
 function Map ({className, offers, selectedOffer} : MapProps):JSX.Element {
