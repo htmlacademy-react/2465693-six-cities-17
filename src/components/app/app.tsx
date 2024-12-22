@@ -11,20 +11,19 @@ import { RentalOffer, SelectedRentalOffer } from '../../types/offer.ts';
 import { OfferReview } from '../../types/review.ts';
 
 type AppPageProps = {
-  offers: RentalOffer[];
   favorites: RentalOffer[];
   nearbyOffers: RentalOffer[];
   offerIds: SelectedRentalOffer[];
   reviews: OfferReview[];
 };
 
-function App({ offers, favorites, nearbyOffers, offerIds, reviews }: AppPageProps): JSX.Element {
+function App({ favorites, nearbyOffers, offerIds, reviews }: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={RoutePath.Index}>
-            <Route index element={<MainPage offers={offers} />} />
+            <Route index element={<MainPage />} />
             <Route path={RoutePath.Offer} element={<OfferPage nearbyOffers={nearbyOffers} offersIds={offerIds} reviews={reviews}/>} />
             <Route
               path={RoutePath.Favorites}

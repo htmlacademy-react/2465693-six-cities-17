@@ -36,12 +36,6 @@ const ComentsLenght = {
   MAX: 300,
 };
 
-const URL_MARKER_DEFAULT =
-  '../markup/img/pin.svg';
-
-const URL_MARKER_CURRENT =
-  '../markup/img/pin-active.svg';
-
 const NUMBER_OF_REVIEW = 10;
 
 const NUMBER_NEARBY_OFFER = 3;
@@ -62,4 +56,22 @@ const enum MapSetting {
   Atribution= '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 }
 
-export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, URL_MARKER_DEFAULT, URL_MARKER_CURRENT, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting};
+const MarkerSetting = {
+  UrlDefault: '/public/img/pin.svg',
+  UrlActive: '/public/img/pin-active.svg',
+  Width: 28,
+  Height: 40,
+  Left: 14,
+  Top: 40,
+};
+
+const DEFAULT_CITY = LOCATIONS[0];
+
+enum SortOption {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRated = 'Top rated first',
+}
+
+export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption };
