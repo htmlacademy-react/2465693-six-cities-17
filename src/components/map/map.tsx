@@ -23,10 +23,13 @@ const currentCustomIcon = new Icon({
   iconAnchor: [MarkerSetting.Left, MarkerSetting.Top]
 });
 
-function Map ({className, offers, selectedOffer} : MapProps):JSX.Element {
+const DEFAULT_CLASS_NAME = 'cities__map';
+
+function Map ({className = DEFAULT_CLASS_NAME, offers, selectedOffer} : MapProps):JSX.Element {
   const mapRef = useRef(null);
   const offerCity = offers[0].city;
-  const map = useMap(mapRef, offerCity);
+  const shouldZoomOnScroll = className === DEFAULT_CLASS_NAME;
+  const map = useMap(mapRef, offerCity, shouldZoomOnScroll);
 
   useEffect(() => {
     if (map) {

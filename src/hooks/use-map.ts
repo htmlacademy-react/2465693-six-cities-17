@@ -3,7 +3,7 @@ import { Map, TileLayer } from 'leaflet';
 import { CityOffer } from '../types/offer';
 import {useEffect, useState, useRef, MutableRefObject} from 'react';
 
-function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: CityOffer):Map|null {
+function useMap(mapRef:MutableRefObject<HTMLElement | null>, city:CityOffer, shouldZoomOnScroll:boolean):Map|null {
   const [map, setMap] = useState<Map|null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
@@ -25,6 +25,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: CityOffer):M
           lng: city.location.longitude,
         },
         zoom: city.location.zoom,
+        scrollWheelZoom: shouldZoomOnScroll,
       });
 
       const layer = new TileLayer(
@@ -38,7 +39,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: CityOffer):M
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, city]);
+  }, [mapRef, city, shouldZoomOnScroll]);
 
   return map;
 }
