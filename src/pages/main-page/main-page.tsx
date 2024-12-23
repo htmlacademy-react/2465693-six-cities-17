@@ -48,7 +48,7 @@ function MainPage(): JSX.Element {
 
             </section>
             <div className="cities__right-section">
-              {currentCityOffers.length > 0 ? <Map className={'cities__map'} offers={currentCityOffers} activeOfferCardId={activeOfferCardId}/> : null}
+              {!!currentCityOffers.length && <Map className={'cities__map'} offers={currentCityOffers} activeOfferCardId={activeOfferCardId}/>}
             </div>
           </div>
         </div>
