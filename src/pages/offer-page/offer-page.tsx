@@ -101,7 +101,7 @@ function OfferPage({nearbyOffers, offersIds, reviews}: OfferPageProps): JSX.Elem
             </div>
           </div>
 
-          <Map className={'offer__map'} offers={offers} selectedOffer={selectedOffer}/>
+          <Map className={'offer__map'} offers={offers} activeOfferCardId={selectedOffer.id}/>
 
         </section>
         <div className="container">
