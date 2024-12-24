@@ -8,7 +8,7 @@ import { MarkerSetting } from '../../const';
 type MapProps ={
   className: string;
   offers: (RentalOffer|SelectedRentalOffer)[];
-  selectedOffer?: RentalOffer|SelectedRentalOffer;
+  activeOfferCardId?: string|null;
 };
 
 const defaultCustomIcon = new Icon({
@@ -23,10 +23,13 @@ const currentCustomIcon = new Icon({
   iconAnchor: [MarkerSetting.Left, MarkerSetting.Top]
 });
 
-function Map ({className, offers, selectedOffer} : MapProps):JSX.Element {
+const DEFAULT_CLASS_NAME = 'cities__map';
+
+function Map ({className = DEFAULT_CLASS_NAME, offers, activeOfferCardId} : MapProps):JSX.Element {
   const mapRef = useRef(null);
   const offerCity = offers[0].city;
-  const map = useMap(mapRef, offerCity);
+  const shouldZoomOnScroll = className === DEFAULT_CLASS_NAME;
+  const map = useMap(mapRef, offerCity, shouldZoomOnScroll);
 
   useEffect(() => {
     if (map) {
@@ -37,7 +40,7 @@ function Map ({className, offers, selectedOffer} : MapProps):JSX.Element {
           lng: offer.location.longitude,
         });
         marker.setIcon(
-          selectedOffer !== undefined && offer.id === selectedOffer.id
+          offer.id === activeOfferCardId
             ? currentCustomIcon
             : defaultCustomIcon
         ).addTo(markerLayer);
@@ -47,7 +50,7 @@ function Map ({className, offers, selectedOffer} : MapProps):JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, activeOfferCardId]);
 
   return (
     <section className={`${className} map`} ref={mapRef}>

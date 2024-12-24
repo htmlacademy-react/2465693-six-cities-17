@@ -22,7 +22,6 @@ function MainPage(): JSX.Element {
   const offerCardMouseLeaveHandler = (): void => {
     setActiveOfferCardId(null);
   };
-  const selectedOffer = currentCityOffers.find((offer) => offer.id === activeOfferCardId);
 
   return (
     <div className="page page--gray page--main">
@@ -49,7 +48,7 @@ function MainPage(): JSX.Element {
 
             </section>
             <div className="cities__right-section">
-              {currentCityOffers.length > 0 ? <Map className={'cities__map'} offers={currentCityOffers} selectedOffer={selectedOffer}/> : null}
+              {!!currentCityOffers.length && <Map className={'cities__map'} offers={currentCityOffers} activeOfferCardId={activeOfferCardId}/>}
             </div>
           </div>
         </div>

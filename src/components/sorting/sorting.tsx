@@ -1,8 +1,8 @@
-import { SortOption } from '../../const';
-import { changeSorting } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
+import { changeSorting } from '../../store/action';
+import { SortOption } from '../../const';
+import classNames from 'classnames';
 
 function Sorting ():JSX.Element {
   const [isSortingListOpen, setIsSortingListOpen] = useState(false);
