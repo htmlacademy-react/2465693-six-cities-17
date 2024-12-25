@@ -10,6 +10,14 @@ const enum RoutePath {
   NotFound = '*',
 }
 
+const enum APIRoute {
+  Offers = '/offers',
+  Favorites = '/favorite',
+  Reviews = '/comments',
+  Login = '/login',
+  Logout = '/logout'
+}
+
 const enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -78,4 +86,4 @@ enum SortOption {
   TopRated = 'Top rated first',
 }
 
-export { BACKEND_URL, REQUEST_TIMEOUT, AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption };
+export { BACKEND_URL, REQUEST_TIMEOUT, AuthorizationStatus, RoutePath, APIRoute, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption };

@@ -2,9 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import {createAPI} from '../services/api';
 import { reducer } from './reducer';
 
-export const api = createAPI();
+const api = createAPI();
 
-export const store = configureStore({
+const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -14,4 +14,4 @@ export const store = configureStore({
     }),
 });
 
-// export {store, api};
+export {store, api};
