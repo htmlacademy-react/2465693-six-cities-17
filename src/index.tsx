@@ -9,6 +9,7 @@ import { reviews } from './mocks/reviews';
 import { store } from './store';
 import { Provider } from 'react-redux';
 import { loadOffers } from './store/action';
+import ErrorMessage from './components/error-message/error-message';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -18,6 +19,7 @@ store.dispatch(loadOffers(offers));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <App favorites={favorites} nearbyOffers={nearbyOffers} offerIds={offerIds} reviews={reviews}/>
     </Provider>
   </React.StrictMode>
