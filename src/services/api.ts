@@ -1,6 +1,21 @@
-import axios, {AxiosInstance, InternalAxiosRequestConfig} from 'axios';
+import axios, {AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
+import { processErrorHandle } from './process-error-handle';
 import { BACKEND_URL, REQUEST_TIMEOUT } from '../const';
+import { StatusCodes } from 'http-status-codes';
 import { getToken } from './token';
+
+type MessageType = {
+  type: string;
+  message: string;
+}
+
+const StatusCodeMapping: Record<number,boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true,
+};
+
+const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
 const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -20,7 +35,19 @@ const createAPI = (): AxiosInstance => {
     },
   );
 
+  api.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError<MessageType>) => {
+      if (error.response && shouldDisplayError(error.response)) {
+        const detailMessage = (error.response.data);
+
+        processErrorHandle(detailMessage.message);
+      }
+
+      throw error;
+    }
+  );
+
   return api;
 };
-
 export {createAPI};
