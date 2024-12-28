@@ -11,6 +11,8 @@ const changeSorting = createAction<SortOption>('main/changeSorting');
 
 const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
+const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
+
 const setError = createAction<string | null>('common/setError');
 
-export {changeCity, loadOffers, changeSorting, requireAuthorization, setError};
+export {changeCity, loadOffers, changeSorting, requireAuthorization, setOffersLoadingStatus, setError};

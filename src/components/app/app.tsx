@@ -9,6 +9,8 @@ import { HelmetProvider } from 'react-helmet-async';
 import { RoutePath, AuthorizationStatus } from '../../const.ts';
 import { RentalOffer, SelectedRentalOffer } from '../../types/offer.ts';
 import { OfferReview } from '../../types/review.ts';
+import { useAppSelector } from '../../hooks/index.ts';
+import LoadingPage from '../../pages/loading-page/loading-page.tsx';
 
 type AppPageProps = {
   favorites: RentalOffer[];
@@ -18,6 +20,15 @@ type AppPageProps = {
 };
 
 function App({ favorites, nearbyOffers, offerIds, reviews }: AppPageProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -25,14 +36,7 @@ function App({ favorites, nearbyOffers, offerIds, reviews }: AppPageProps): JSX.
           <Route path={RoutePath.Index}>
             <Route index element={<MainPage />} />
             <Route path={RoutePath.Offer} element={<OfferPage nearbyOffers={nearbyOffers} offersIds={offerIds} reviews={reviews}/>} />
-            <Route
-              path={RoutePath.Favorites}
-              element={
-                <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                  <FavoritesPage offers={favorites} />
-                </PrivateRoute>
-              }
-            />
+            <Route path={RoutePath.Favorites} element={<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><FavoritesPage offers={favorites} /></PrivateRoute>}/>
             <Route path={RoutePath.Login} element={<LoginPage />} />
             <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
           </Route>
