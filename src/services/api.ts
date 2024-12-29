@@ -9,13 +9,14 @@ type MessageType = {
   message: string;
 }
 
+//статусы для тостов когда кидать оповещение , а когда нет
 const StatusCodeMapping: Record<number,boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.UNAUTHORIZED]: false,
   [StatusCodes.NOT_FOUND]: true,
 };
 
-const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
+const shouldDisplayError = (response: AxiosResponse) => StatusCodeMapping[response.status];
 
 const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -39,9 +40,9 @@ const createAPI = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<MessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        const detailMessage = (error.response.data);
+        const detailErrorMessage = (error.response.data);
 
-        processErrorHandle(detailMessage.message);
+        processErrorHandle(detailErrorMessage.message);
       }
 
       throw error;

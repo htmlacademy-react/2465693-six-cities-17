@@ -2,11 +2,7 @@
 import HeaderLogo from './components/header-logo';
 import HeaderNav from './components/header-nav';
 
-type HeaderNavProps = {
-  hideNav?: boolean;
-}
-
-function Header ({hideNav = false}: HeaderNavProps):JSX.Element {
+function Header ():JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -14,7 +10,7 @@ function Header ({hideNav = false}: HeaderNavProps):JSX.Element {
           <div className="header__left">
             <HeaderLogo/>
           </div>
-          {hideNav || <HeaderNav/>}
+          <HeaderNav/>
         </div>
       </div>
     </header>

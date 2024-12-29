@@ -36,7 +36,7 @@ function App({ favorites, nearbyOffers, offerIds, reviews }: AppPageProps): JSX.
           <Route path={RoutePath.Index}>
             <Route index element={<MainPage />} />
             <Route path={RoutePath.Offer} element={<OfferPage nearbyOffers={nearbyOffers} offersIds={offerIds} reviews={reviews}/>} />
-            <Route path={RoutePath.Favorites} element={<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><FavoritesPage offers={favorites} /></PrivateRoute>}/>
+            <Route path={RoutePath.Favorites} element={<PrivateRoute><FavoritesPage offers={favorites} /></PrivateRoute>}/>
             <Route path={RoutePath.Login} element={<LoginPage />} />
             <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
           </Route>
