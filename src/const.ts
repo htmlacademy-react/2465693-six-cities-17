@@ -1,9 +1,23 @@
+const BACKEND_URL = 'https://16.design.htmlacademy.pro/six-cities';
+
+const REQUEST_TIMEOUT = 5000;
+
+const TIMEOUT_SHOW_ERROR = 2000;
+
 const enum RoutePath {
   Index = '/',
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer/:id',
   NotFound = '*',
+}
+
+const enum APIRoute {
+  Offers = '/offers',
+  Favorites = '/favorite',
+  Reviews = '/comments',
+  Login = '/login',
+  Logout = '/logout'
 }
 
 const enum AuthorizationStatus {
@@ -74,4 +88,4 @@ enum SortOption {
   TopRated = 'Top rated first',
 }
 
-export { AuthorizationStatus, RoutePath, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption };
+export { BACKEND_URL, REQUEST_TIMEOUT, TIMEOUT_SHOW_ERROR, AuthorizationStatus, RoutePath, APIRoute, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption };
