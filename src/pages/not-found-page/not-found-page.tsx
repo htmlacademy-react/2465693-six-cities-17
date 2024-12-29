@@ -11,7 +11,7 @@ function NotFoundPage():JSX.Element{
       <Helmet>
         <title>6 городов. Станица не найдена</title>
       </Helmet>
-      <Header hideNav/>
+      <Header/>
       <main className="page__main">
         <div className="container">
           <h1 style={{fontSize: '138px'}}>404</h1>
