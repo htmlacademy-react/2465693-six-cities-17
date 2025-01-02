@@ -1,4 +1,4 @@
-import { changeCity, loadOffers, changeSorting, requireAuthorization, setError, setOffersLoadingStatus, setUserInfo } from './action';
+import { changeCity, loadOffers, changeSorting, requireAuthorization, setOffersLoadingStatus, setUserInfo } from './action';
 import { AuthorizationStatus, DEFAULT_CITY, SortOption} from '../const';
 import { createReducer } from '@reduxjs/toolkit';
 import { RentalOffer } from '../types/offer';
@@ -11,7 +11,6 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus;
   userInfo: UserData|null;
   isOffersLoading: boolean;
-  error: string|null;
 };
 
 const initialState: InitialState = {
@@ -21,8 +20,6 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userInfo: null,
   isOffersLoading: false,
-
-  error:null,
 };
 
 const reducer = createReducer(initialState, (builder)=> {
@@ -44,9 +41,6 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;
-    })
-    .addCase(setError, (state, action) =>{
-      state.error = action.payload;
     });
 });
 

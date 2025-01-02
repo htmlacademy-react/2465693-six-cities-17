@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import FavoritesPage from '../../pages/favorites-page/favorites-page.tsx';
 import NotFoundPage from '../../pages/not-found-page/not-found-page.tsx';
 import OfferPage from '../../pages/offer-page/offer-page.tsx';
@@ -11,6 +11,8 @@ import { RentalOffer, SelectedRentalOffer } from '../../types/offer.ts';
 import { OfferReview } from '../../types/review.ts';
 import { useAppSelector } from '../../hooks/index.ts';
 import LoadingPage from '../../pages/loading-page/loading-page.tsx';
+import HistoryRouter from '../history-route/history-route.tsx';
+import browserHistory from '../../browser-history.ts';
 
 type AppPageProps = {
   favorites: RentalOffer[];
@@ -31,7 +33,7 @@ function App({ favorites, nearbyOffers, offerIds, reviews }: AppPageProps): JSX.
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={RoutePath.Index}>
             <Route index element={<MainPage />} />
@@ -41,7 +43,7 @@ function App({ favorites, nearbyOffers, offerIds, reviews }: AppPageProps): JSX.
             <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { RentalOffer } from '../types/offer';
-import { SortOption } from '../const';
+import { RoutePath, SortOption } from '../const';
 import { AuthorizationStatus } from '../const';
 import { UserData } from '../types/user-data';
 
@@ -18,4 +18,6 @@ const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
 
 const setError = createAction<string | null>('common/setError');
 
-export {changeCity, loadOffers, changeSorting, requireAuthorization, setUserInfo, setOffersLoadingStatus, setError};
+const redirectToRoute = createAction<RoutePath>('common/redirectToRoute');
+
+export {changeCity, loadOffers, changeSorting, requireAuthorization, setUserInfo, setOffersLoadingStatus, setError, redirectToRoute};

@@ -1,5 +1,5 @@
-import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
-import {loadOffers, requireAuthorization, setError, setOffersLoadingStatus, setUserInfo} from './action';
+import {APIRoute, AuthorizationStatus, RoutePath} from '../const';
+import {loadOffers, redirectToRoute, requireAuthorization, setOffersLoadingStatus, setUserInfo} from './action';
 import {AppDispatch, AppState} from '../types/state.js';
 import {saveToken, dropToken} from '../services/token';
 import {createAsyncThunk} from '@reduxjs/toolkit';
@@ -7,17 +7,6 @@ import { RentalOffer } from '../types/offer.js';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {AxiosInstance} from 'axios';
-import { store } from './index.js';
-
-export const clearErrorAction = createAsyncThunk(
-  'common/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -26,10 +15,10 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<RentalOffer[]>(APIRoute.Offers);
     dispatch(setOffersLoadingStatus(true));
-    dispatch(loadOffers(data));
+    const {data} = await api.get<RentalOffer[]>(APIRoute.Offers);
     dispatch(setOffersLoadingStatus(false));
+    dispatch(loadOffers(data));
   },
 );
 
@@ -61,6 +50,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(data.token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(setUserInfo(data));
+    dispatch(redirectToRoute(RoutePath.Index));
   },
 );
 
