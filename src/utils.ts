@@ -1,6 +1,7 @@
 import { ONE_STAR_RATING, SortOption } from './const';
 import { RentalOffer } from './types/offer';
 import { OfferReview } from './types/review';
+import { LOCATIONS } from './const';
 
 //Функция возвращающая слово с заглавной буквы
 const capitalizeLetter = (word: string) => word[0].toUpperCase() + word.slice(1);
@@ -43,4 +44,8 @@ const getSortedOfferCards = (offers: RentalOffer[], currentSort: SortOption) =>{
   }
 };
 
-export { capitalizeLetter, getRatingWidth, getDateFormat, sortToDate, getSortedOfferCards };
+//получаем случайный город
+const getRandomCity = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
+
+
+export { capitalizeLetter, getRatingWidth, getDateFormat, sortToDate, getSortedOfferCards, getRandomCity };
