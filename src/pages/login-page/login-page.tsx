@@ -14,6 +14,7 @@ function LoginPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const randomCity = getRandomCity;
 
   const handleSubmitLogin = (evt:FormEvent<HTMLFormElement>)=>{
     evt.preventDefault();
@@ -30,6 +31,7 @@ function LoginPage(): JSX.Element {
     }
   };
 
+  const handleClickCity = () => dispatch(changeCity(randomCity));
 
   return (
     <div className="page page--gray page--login">
@@ -77,8 +79,8 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={RoutePath.Index} onClick={()=>dispatch(changeCity(getRandomCity))}>
-                <span>{getRandomCity}</span>
+              <Link className="locations__item-link" to={RoutePath.Index} onClick={handleClickCity}>
+                <span>{randomCity}</span>
               </Link>
             </div>
           </section>
