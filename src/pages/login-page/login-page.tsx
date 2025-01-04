@@ -2,9 +2,11 @@ import { FormEvent, useRef } from 'react';
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { loginAction } from '../../store/api-action';
 import { RoutePath } from '../../const';
+import { getRandomCity } from '../../utils';
+import { changeCity } from '../../store/action';
 
 function LoginPage(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -12,6 +14,7 @@ function LoginPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const randomCity = getRandomCity;
 
   const handleSubmitLogin = (evt:FormEvent<HTMLFormElement>)=>{
     evt.preventDefault();
@@ -28,6 +31,7 @@ function LoginPage(): JSX.Element {
     }
   };
 
+  const handleClickCity = () => dispatch(changeCity(randomCity));
 
   return (
     <div className="page page--gray page--login">
@@ -75,9 +79,9 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to={RoutePath.Index} onClick={handleClickCity}>
+                <span>{randomCity}</span>
+              </Link>
             </div>
           </section>
         </div>
