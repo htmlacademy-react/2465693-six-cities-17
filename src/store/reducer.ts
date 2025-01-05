@@ -1,25 +1,42 @@
-import { changeCity, loadOffers, changeSorting, requireAuthorization, setOffersLoadingStatus, setUserInfo } from './action';
+import { changeCity, loadOffers, changeSorting, requireAuthorization, setOffersLoadingStatus, setUserInfo, loadOffer, loadNearPlaces, loadReviews, setReviewsLoadingStatus, setNearByLoadingStatus, setOfferLoadingStatus } from './action';
 import { AuthorizationStatus, DEFAULT_CITY, SortOption} from '../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { RentalOffer } from '../types/offer';
+import { RentalOffer, SelectedRentalOffer } from '../types/offer';
 import { UserData } from '../types/user-data';
+import { OfferReview } from '../types/review';
 
 type InitialState = {
   city: string;
   offers: RentalOffer[];
   currentSort: SortOption;
+  selectedOffer: SelectedRentalOffer|null;
+  nearPlaces: RentalOffer[];
   authorizationStatus: AuthorizationStatus;
   userInfo: UserData|null;
+  reviews: OfferReview[];
+  favorites:RentalOffer[];
   isOffersLoading: boolean;
+  isOfferLoading: boolean;
+  isReviewsLoading: boolean;
+  isNearbyLoading: boolean;
+  isFavoriteLoading: boolean;
 };
 
 const initialState: InitialState = {
   city: DEFAULT_CITY,
   offers: [],
   currentSort: SortOption.Popular,
+  selectedOffer: null,
+  nearPlaces: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   userInfo: null,
+  reviews: [],
+  favorites: [],
   isOffersLoading: false,
+  isOfferLoading: false,
+  isReviewsLoading: false,
+  isNearbyLoading: false,
+  isFavoriteLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder)=> {
@@ -29,6 +46,15 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(loadOffer, (state, action) => {
+      state.selectedOffer = action.payload;
+    })
+    .addCase(loadNearPlaces, (state, action) => {
+      state.nearPlaces = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
     })
     .addCase(changeSorting, (state, action) => {
       state.currentSort = action.payload;
@@ -41,6 +67,15 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;
+    })
+    .addCase(setOfferLoadingStatus, (state, action) => {
+      state.isOfferLoading = action.payload;
+    })
+    .addCase(setNearByLoadingStatus, (state, action) => {
+      state.isNearbyLoading = action.payload;
+    })
+    .addCase(setReviewsLoadingStatus, (state, action) => {
+      state.isReviewsLoading = action.payload;
     });
 });
 
