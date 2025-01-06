@@ -27,10 +27,12 @@ const setNearByLoadingStatus = createAction<boolean>('common/setNearByLoadingSta
 
 const setReviewsLoadingStatus = createAction<boolean>('common/setReviewsLoadingStatus');
 
+const setReviewPostingStatus = createAction<boolean>('common/setReviewsPostingStatus');
+
 const setOfferLoadingStatus = createAction<boolean>('common/setOfferLoadingStatus');
 
 const setError = createAction<string | null>('common/setError');
 
 const redirectToRoute = createAction<RoutePath>('common/redirectToRoute');
 
-export {changeCity, loadOffers, changeSorting, requireAuthorization, setUserInfo, setOffersLoadingStatus, setError, redirectToRoute, setOfferLoadingStatus, loadOffer, loadNearPlaces, loadReviews, setNearByLoadingStatus, setReviewsLoadingStatus};
+export {changeCity, loadOffers, changeSorting, requireAuthorization, setUserInfo, setOffersLoadingStatus, setError, redirectToRoute, setOfferLoadingStatus, loadOffer, loadNearPlaces, loadReviews, setNearByLoadingStatus, setReviewsLoadingStatus, setReviewPostingStatus};

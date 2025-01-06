@@ -105,7 +105,7 @@ function OfferPage(): JSX.Element {
                 </h2>
 
                 <ReviewList reviews={reviews}/>
-                {(isAuthorization === AuthorizationStatus.Auth) && <FormComment/>}
+                {(isAuthorization === AuthorizationStatus.Auth && id) && <FormComment offerId={id}/>}
 
               </section>
             </div>

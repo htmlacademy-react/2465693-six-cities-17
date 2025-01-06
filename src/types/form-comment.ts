@@ -1,6 +1,6 @@
 export type FormStateType = {
   rating: number;
-  review: string;
+  comment: string;
 }
 
 export type Ratings = readonly [number, string][];

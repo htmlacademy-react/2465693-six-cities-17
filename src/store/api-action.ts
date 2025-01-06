@@ -1,5 +1,5 @@
 import {APIRoute, AuthorizationStatus, RoutePath} from '../const';
-import {loadNearPlaces, loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setNearByLoadingStatus, setOfferLoadingStatus, setOffersLoadingStatus, setReviewsLoadingStatus, setUserInfo} from './action';
+import {loadNearPlaces, loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setNearByLoadingStatus, setOfferLoadingStatus, setOffersLoadingStatus, setReviewPostingStatus, setReviewsLoadingStatus, setUserInfo} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer.js';
@@ -29,7 +29,7 @@ export const fetchNearbyAction = createAsyncThunk<void, string, ThunkType>(
 );
 
 export const fetchReviewsAction = createAsyncThunk<void, string, ThunkType>(
-  'data/fetchReviews',
+  'reviews/fetchReviews',
   async (offerId, {dispatch, extra: api}) => {
     dispatch(setReviewsLoadingStatus(true));
     const {data} = await api.get<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`);
@@ -54,7 +54,6 @@ export const fetchOfferAction = createAsyncThunk<void, string, ThunkType>(
     }
   },
 );
-
 
 export const checkAuthAction = createAsyncThunk<void, undefined, ThunkType>(
   'user/checkAuth',
@@ -87,6 +86,22 @@ export const logoutAction = createAsyncThunk<void, undefined, ThunkType>(
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     dispatch(setUserInfo(null));
+  },
+);
 
+export const postReviewAction = createAsyncThunk<void, {offerId: string; formData: { comment: string; rating: number } },ThunkType>(
+  'reviews/postReview',
+  async ({offerId, formData}, {dispatch, extra: api}) => {
+    dispatch(setReviewPostingStatus(true));
+    try{
+      const postReview = await api.post<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`, formData);
+      const {data} = await api.get<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`);
+      if (postReview?.data){
+        dispatch(loadReviews(data));
+      }
+      dispatch(setReviewPostingStatus(false));
+    } catch{
+      dispatch(setReviewPostingStatus(false));
+    }
   },
 );

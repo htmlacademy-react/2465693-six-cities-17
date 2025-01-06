@@ -1,30 +1,48 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { FormStateType, Ratings } from '../../types/form-comment';
 import FormRating from './components/form-rating';
 import { ComentsLenght } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { postReviewAction } from '../../store/api-action';
 
 const INITIAL_STATE_FORM: FormStateType = {
   rating: 0,
-  review: '',
+  comment: '',
 };
 
-const ratings: Ratings = [
-  [1, 'terribly'],
-  [2, 'badly'],
-  [3, 'not bad'],
-  [4, 'good'],
+const RATINGS: Ratings = [
   [5, 'perfect'],
+  [4, 'good'],
+  [3, 'not bad'],
+  [2, 'badly'],
+  [1, 'terribly'],
 ];
 
-function FormComment():JSX.Element{
-  const [formData, setFormData] = useState<FormStateType>(INITIAL_STATE_FORM);
+type FormCommentProps = {
+  offerId: string;
+}
 
-  const fieldChangeHandle = (name: string, value: number | string) => {
+function FormComment({offerId}:FormCommentProps):JSX.Element{
+  const [formData, setFormData] = useState<FormStateType>(INITIAL_STATE_FORM);
+  const dispatch = useAppDispatch();
+  const isReviewPosting = useAppSelector((state)=>state.isReviewPosting);
+
+  useEffect(() => {
+    if (isReviewPosting) {
+      setFormData({
+        comment: '',
+        rating: 0
+      });
+    }
+  }, [isReviewPosting]);
+
+  const handleFieldChange = (name: string, value: number | string) => {
     setFormData({...formData, [name]: value});
   };
 
   const handleFormSubmit = (evt:ChangeEvent<HTMLFormElement>)=>{
     evt.preventDefault();
+    dispatch(postReviewAction({offerId, formData}));
     evt.currentTarget.reset();
     setFormData(INITIAL_STATE_FORM);
   };
@@ -39,21 +57,20 @@ function FormComment():JSX.Element{
       Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {ratings.map(([value, title]) => (
-          <FormRating key={value} value={value} title={title} fieldChangeHandle={fieldChangeHandle}/>
+        {RATINGS.map(([value, title]) => (
+          <FormRating key={value} value={value} title={title} handleFieldChange={handleFieldChange} currentRating={formData.rating}/>
         )
         )}
-
       </div>
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
-        name="review"
+        name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={(({currentTarget}) => {
-          fieldChangeHandle(currentTarget.name, currentTarget.value);
+          handleFieldChange(currentTarget.name, currentTarget.value);
         })}
-        value={formData.review}
+        value={formData.comment}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -66,7 +83,7 @@ function FormComment():JSX.Element{
           className="reviews__submit form__submit button"
           type="submit"
           disabled={
-            (formData.review.length <= ComentsLenght.MIN || formData.review.length >= ComentsLenght.MAX) || !formData.rating
+            (formData.comment.length <= ComentsLenght.MIN || formData.comment.length >= ComentsLenght.MAX) || !formData.rating
           }
         >
           Submit
