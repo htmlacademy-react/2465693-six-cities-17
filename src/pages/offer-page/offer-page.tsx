@@ -1,7 +1,7 @@
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { NUMBER_NEARBY_OFFER } from '../../const';
+import { AuthorizationStatus, NUMBER_NEARBY_OFFER } from '../../const';
 import Header from '../../components/header/header';
 import OfferCard from '../../components/offer-card/offer-card';
 import { capitalizeLetter, getRatingWidth } from '../../utils';
@@ -23,6 +23,7 @@ function OfferPage(): JSX.Element {
   const nearByOffers = useAppSelector((state) =>state.nearPlaces);
   const reviews = useAppSelector((state)=>state.reviews);
   const nearPlacesOffers = nearByOffers.slice(0, NUMBER_NEARBY_OFFER);
+  const isAuthorization = useAppSelector((state)=>state.authorizationStatus);
   const isOfferLoadingStatus = useAppSelector((state)=>state.isOfferLoading);
   const isNearPlacesLoadingStatus = useAppSelector((state)=>state.isNearbyLoading);
   const isReviewsLoadingStatus = useAppSelector((state)=>state.isReviewsLoading);
@@ -104,7 +105,7 @@ function OfferPage(): JSX.Element {
                 </h2>
 
                 <ReviewList reviews={reviews}/>
-                <FormComment/>
+                {(isAuthorization === AuthorizationStatus.Auth) && <FormComment/>}
 
               </section>
             </div>
