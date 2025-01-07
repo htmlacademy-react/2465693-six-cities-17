@@ -1,4 +1,4 @@
-import { changeCity, loadOffers, changeSorting, requireAuthorization, setOffersLoadingStatus, setUserInfo, loadOffer, loadNearPlaces, loadReviews, setReviewsLoadingStatus, setNearByLoadingStatus, setOfferLoadingStatus, setReviewPostingStatus } from './action';
+import { changeCity, loadOffers, changeSorting, requireAuthorization, setOffersLoadingStatus, setUserInfo, loadOffer, loadNearPlaces, loadReviews, setReviewsLoadingStatus, setNearByLoadingStatus, setOfferLoadingStatus, setReviewPostingStatus, setReviewPostingError } from './action';
 import { AuthorizationStatus, DEFAULT_CITY, SortOption} from '../const';
 import { createReducer } from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer';
@@ -19,6 +19,7 @@ type InitialState = {
   isOfferLoading: boolean;
   isReviewsLoading: boolean;
   isReviewPosting: boolean;
+  isReviewPostingError: boolean;
   isNearbyLoading: boolean;
   isFavoriteLoading: boolean;
 };
@@ -37,6 +38,7 @@ const initialState: InitialState = {
   isOfferLoading: false,
   isReviewsLoading: false,
   isReviewPosting: false,
+  isReviewPostingError: false,
   isNearbyLoading: false,
   isFavoriteLoading: false,
 };
@@ -81,6 +83,9 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(setReviewPostingStatus, (state, action) => {
       state.isReviewPosting = action.payload;
+    })
+    .addCase(setReviewPostingError, (state, action) => {
+      state.isReviewPostingError = action.payload;
     });
 });
 

@@ -1,5 +1,5 @@
 import {APIRoute, AuthorizationStatus, RoutePath} from '../const';
-import {loadNearPlaces, loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setNearByLoadingStatus, setOfferLoadingStatus, setOffersLoadingStatus, setReviewPostingStatus, setReviewsLoadingStatus, setUserInfo} from './action';
+import {loadNearPlaces, loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setNearByLoadingStatus, setOfferLoadingStatus, setOffersLoadingStatus, setReviewPostingError, setReviewPostingStatus, setReviewsLoadingStatus, setUserInfo} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer.js';
@@ -89,19 +89,20 @@ export const logoutAction = createAsyncThunk<void, undefined, ThunkType>(
   },
 );
 
-export const postReviewAction = createAsyncThunk<void, {offerId: string; formData: { comment: string; rating: number } },ThunkType>(
+export const postReviewAction = createAsyncThunk<void, {offerId: string; postFormData: { comment: string; rating: number } },ThunkType>(
   'reviews/postReview',
-  async ({offerId, formData}, {dispatch, extra: api}) => {
-    dispatch(setReviewPostingStatus(true));
+  async ({offerId, postFormData}, {dispatch, extra: api}) => {
     try{
-      const postReview = await api.post<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`, formData);
+      const postReview = await api.post<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`, postFormData);
+      dispatch(setReviewPostingStatus(true));
       const {data} = await api.get<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`);
+
       if (postReview?.data){
         dispatch(loadReviews(data));
+        dispatch(setReviewPostingStatus(false));
       }
-      dispatch(setReviewPostingStatus(false));
     } catch{
-      dispatch(setReviewPostingStatus(false));
+      dispatch(setReviewPostingError(true));
     }
   },
 );

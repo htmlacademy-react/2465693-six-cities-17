@@ -1,7 +1,7 @@
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { AuthorizationStatus, NUMBER_NEARBY_OFFER } from '../../const';
+import { AuthorizationStatus, NUMBER_NEARBY_OFFER, IMAGES_OFFER_COUNT } from '../../const';
 import Header from '../../components/header/header';
 import OfferCard from '../../components/offer-card/offer-card';
 import { capitalizeLetter, getRatingWidth } from '../../utils';
@@ -45,7 +45,7 @@ function OfferPage(): JSX.Element {
   return (
     <div className="page">
       <Helmet>
-        <title>6 городов. Предложения</title>
+        <title>6 городов. Предложение</title>
       </Helmet>
       <Header/>
 
@@ -53,7 +53,7 @@ function OfferPage(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {selectedOffer.images.map((item)=> <GalleryItem key={item} src={item}/>) }
+              {selectedOffer.images.slice(0,IMAGES_OFFER_COUNT).map((item)=> <GalleryItem key={item} src={item}/>) }
             </div>
           </div>
           <div className="offer__container container">

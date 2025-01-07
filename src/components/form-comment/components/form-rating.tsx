@@ -1,3 +1,5 @@
+import { useAppSelector } from '../../../hooks';
+
 type FormRatingType = {
   value: number;
   title: string;
@@ -6,6 +8,7 @@ type FormRatingType = {
 }
 
 function FormRating({value, title, handleFieldChange: handleFieldChange, currentRating}: FormRatingType):JSX.Element {
+  const isReviewPosting = useAppSelector((state)=>state.isReviewPosting);
 
   return(
     <>
@@ -17,6 +20,7 @@ function FormRating({value, title, handleFieldChange: handleFieldChange, current
         type="radio"
         onChange={({currentTarget}) => handleFieldChange(currentTarget.name, value)}
         checked={value === currentRating}
+        disabled={isReviewPosting}
       />
       <label
         htmlFor={`${value}-stars`}

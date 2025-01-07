@@ -26,6 +26,7 @@ function FormComment({offerId}:FormCommentProps):JSX.Element{
   const [formData, setFormData] = useState<FormStateType>(INITIAL_STATE_FORM);
   const dispatch = useAppDispatch();
   const isReviewPosting = useAppSelector((state)=>state.isReviewPosting);
+  const isReviewPostingError = useAppSelector((state)=>state.isReviewPostingError);
 
   useEffect(() => {
     if (isReviewPosting) {
@@ -42,9 +43,14 @@ function FormComment({offerId}:FormCommentProps):JSX.Element{
 
   const handleFormSubmit = (evt:ChangeEvent<HTMLFormElement>)=>{
     evt.preventDefault();
-    dispatch(postReviewAction({offerId, formData}));
+    const postFormData = {...formData};
+    dispatch(postReviewAction({postFormData, offerId}));
+    if (!isReviewPostingError) {
+      setFormData(postFormData);
+    } else {
+      setFormData(INITIAL_STATE_FORM);
+    }
     evt.currentTarget.reset();
-    setFormData(INITIAL_STATE_FORM);
   };
 
 
@@ -71,6 +77,7 @@ function FormComment({offerId}:FormCommentProps):JSX.Element{
           handleFieldChange(currentTarget.name, currentTarget.value);
         })}
         value={formData.comment}
+        disabled={isReviewPosting}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -83,10 +90,10 @@ function FormComment({offerId}:FormCommentProps):JSX.Element{
           className="reviews__submit form__submit button"
           type="submit"
           disabled={
-            (formData.comment.length <= ComentsLenght.MIN || formData.comment.length >= ComentsLenght.MAX) || !formData.rating
+            (formData.comment.length <= ComentsLenght.MIN || formData.comment.length >= ComentsLenght.MAX) || !formData.rating || isReviewPosting
           }
         >
-          Submit
+          {isReviewPosting ? 'Submitting' : 'Submit'}
         </button>
       </div>
     </form>
