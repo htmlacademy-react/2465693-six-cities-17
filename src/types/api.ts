@@ -6,3 +6,8 @@ export type ThunkType = {
   state: AppState;
   extra: AxiosInstance;
 }
+
+export type ThunkTypeNew = {
+  state: AppState;
+  extra: AxiosInstance;
+}

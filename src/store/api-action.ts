@@ -1,11 +1,11 @@
-import {APIRoute, AuthorizationStatus, RoutePath} from '../const';
-import {loadNearPlaces, loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setNearByLoadingStatus, setOfferLoadingStatus, setOffersLoadingStatus, setReviewPostingError, setReviewPostingStatus, setReviewsLoadingStatus, setUserInfo} from './action';
+import {APIRoute, RoutePath} from '../const';
+import {loadNearPlaces, loadOffer, loadOffers, loadReviews, redirectToRoute, setNearByLoadingStatus, setOfferLoadingStatus, setOffersLoadingStatus, setReviewPostingError, setReviewPostingStatus, setReviewsLoadingStatus} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer.js';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import { ThunkType } from '../types/api.js';
+import { ThunkType, ThunkTypeNew } from '../types/api.js';
 import { OfferReview } from '../types/review.js';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, ThunkType>(
@@ -55,37 +55,28 @@ export const fetchOfferAction = createAsyncThunk<void, string, ThunkType>(
   },
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, ThunkType>(
+export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkTypeNew>(
   'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
-    try {
-      const {data} = await api.get<UserData>(APIRoute.Login);
-      dispatch(setUserInfo(data));
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    }
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<UserData>(APIRoute.Login);
+    return data;
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, ThunkType>(
+export const loginAction = createAsyncThunk<UserData, AuthData, ThunkTypeNew>(
   'user/login',
-  async ({email, password}, {dispatch, extra: api}) => {
+  async ({email, password}, {extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(setUserInfo(data));
-    dispatch(redirectToRoute(RoutePath.Index));
+    return data;
   },
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, ThunkType>(
+export const logoutAction = createAsyncThunk<void, undefined, ThunkTypeNew>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    dispatch(setUserInfo(null));
   },
 );
 

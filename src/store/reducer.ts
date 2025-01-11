@@ -1,9 +1,10 @@
-import { changeCity, loadOffers, changeSorting, requireAuthorization, setOffersLoadingStatus, setUserInfo, loadOffer, loadNearPlaces, loadReviews, setReviewsLoadingStatus, setNearByLoadingStatus, setOfferLoadingStatus, setReviewPostingStatus, setReviewPostingError } from './action';
+import { changeCity, loadOffers, changeSorting, setOffersLoadingStatus, loadOffer, loadNearPlaces, loadReviews, setReviewsLoadingStatus, setNearByLoadingStatus, setOfferLoadingStatus, setReviewPostingStatus, setReviewPostingError } from './action';
 import { AuthorizationStatus, DEFAULT_CITY, SortOption} from '../const';
 import { createReducer } from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer';
 import { UserData } from '../types/user-data';
 import { OfferReview } from '../types/review';
+import { checkAuthAction, loginAction, logoutAction } from './api-action';
 
 type InitialState = {
   city: string;
@@ -63,11 +64,23 @@ const reducer = createReducer(initialState, (builder)=> {
     .addCase(changeSorting, (state, action) => {
       state.currentSort = action.payload;
     })
-    .addCase(requireAuthorization, (state, action)=> {
-      state.authorizationStatus = action.payload;
-    })
-    .addCase(setUserInfo, (state, action) => {
+    .addCase(checkAuthAction.fulfilled, (state, action)=> {
+      state.authorizationStatus = AuthorizationStatus.Auth;
       state.userInfo = action.payload;
+    })
+    .addCase(checkAuthAction.rejected, (state)=> {
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+    })
+    .addCase(loginAction.fulfilled, (state, action)=> {
+      state.authorizationStatus = AuthorizationStatus.Auth;
+      state.userInfo = action.payload;
+    })
+    .addCase(loginAction.rejected, (state)=> {
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+    })
+    .addCase(logoutAction.fulfilled, (state) => {
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+      state.userInfo = null;
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;

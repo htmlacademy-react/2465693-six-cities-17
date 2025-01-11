@@ -1,8 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer';
 import { RoutePath, SortOption } from '../const';
-import { AuthorizationStatus } from '../const';
-import { UserData } from '../types/user-data';
 import { OfferReview } from '../types/review';
 
 const changeCity = createAction<string>('main/changeCity');
@@ -16,10 +14,6 @@ const loadNearPlaces = createAction<RentalOffer[]>('data/nearBy');
 const loadReviews = createAction<OfferReview[]>('data/reviews');
 
 const changeSorting = createAction<SortOption>('main/changeSorting');
-
-const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-
-const setUserInfo = createAction<UserData | null>('data/setUserInfo');
 
 const setOffersLoadingStatus = createAction<boolean>('common/setOffersLoadingStatus');
 
@@ -37,4 +31,4 @@ const setError = createAction<string | null>('common/setError');
 
 const redirectToRoute = createAction<RoutePath>('common/redirectToRoute');
 
-export {changeCity, loadOffers, changeSorting, requireAuthorization, setUserInfo, setOffersLoadingStatus, setError, redirectToRoute, setOfferLoadingStatus, loadOffer, loadNearPlaces, loadReviews, setNearByLoadingStatus, setReviewsLoadingStatus, setReviewPostingStatus, setReviewPostingError};
+export {changeCity, loadOffers, changeSorting, setOffersLoadingStatus, setError, redirectToRoute, setOfferLoadingStatus, loadOffer, loadNearPlaces, loadReviews, setNearByLoadingStatus, setReviewsLoadingStatus, setReviewPostingStatus, setReviewPostingError};
