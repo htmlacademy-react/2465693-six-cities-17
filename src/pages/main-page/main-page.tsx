@@ -44,11 +44,9 @@ function MainPage(): JSX.Element {
             {!currentCityOffers.length ? (<CityOffersEmpty cityName={activeLocation}/>) :
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{currentCityOffers.length} places to stay in {activeLocation}</b>
-
+                <b className="places__found">{currentCityOffers.length} {(currentCityOffers.length > 1 ? 'places' : 'place')} to stay in {activeLocation}</b>
                 <Sorting />
                 <OfferCardsList offers={currentCityOffers} onOfferCardMouseEnterHandler={offerCardMouseEnterHandler} onOfferCardMouseLeaveHandler={offerCardMouseLeaveHandler} />;
-
               </section>}
             <div className="cities__right-section">
               {!!currentCityOffers.length && <Map className={'cities__map'} offers={currentCityOffers} activeOfferCardId={activeOfferCardId}/>}
