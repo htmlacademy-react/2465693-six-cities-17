@@ -90,7 +90,7 @@ function FormComment({offerId}:FormCommentProps):JSX.Element{
           className="reviews__submit form__submit button"
           type="submit"
           disabled={
-            (formData.comment.length <= ComentsLenght.MIN || formData.comment.length >= ComentsLenght.MAX) || !formData.rating || isReviewPosting
+            formData.comment.length <= ComentsLenght.MIN || formData.comment.length >= ComentsLenght.MAX || !formData.rating || isReviewPosting
           }
         >
           {isReviewPosting ? 'Submitting' : 'Submit'}
