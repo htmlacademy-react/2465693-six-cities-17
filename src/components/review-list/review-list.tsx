@@ -8,12 +8,12 @@ type ReviewListProps ={
 }
 
 function ReviewList({reviews}:ReviewListProps):JSX.Element {
-  const tenReviews = reviews.slice(0, NUMBER_OF_REVIEW);
-  const reviewsSort:OfferReview[] = sortToDate(tenReviews);
+  const reviewsSorted = sortToDate([...reviews]);
+  const tenReviews = reviewsSorted.slice(0, NUMBER_OF_REVIEW);
 
   return(
     <ul className="reviews__list">
-      {reviewsSort.map((review) => (
+      {tenReviews.map((review) => (
         <ReviewItem key={review.id} review={review}/>))}
     </ul>
 

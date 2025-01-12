@@ -1,41 +1,51 @@
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { OfferReview } from '../../types/review';
-import { NUMBER_NEARBY_OFFER } from '../../const';
+import { AuthorizationStatus, NUMBER_NEARBY_OFFER, IMAGES_OFFER_COUNT } from '../../const';
 import Header from '../../components/header/header';
-import NotFoundPage from '../not-found-page/not-found-page';
 import OfferCard from '../../components/offer-card/offer-card';
 import { capitalizeLetter, getRatingWidth } from '../../utils';
 import OfferHost from '../../components/offer-host/offer-host';
 import ReviewList from '../../components/review-list/review-list';
-import { RentalOffer, SelectedRentalOffer } from '../../types/offer';
 import FormComment from '../../components/form-comment/form-comment';
 import GalleryItem from '../../components/gallery-item/gallery-item';
 import BookmarkButton from '../../components/bookmark-button/bookmark-button';
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
+import { useEffect} from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchOfferAction } from '../../store/api-action';
+import LoadingPage from '../loading-page/loading-page';
 
-type OfferPageProps = {
-  nearbyOffers: RentalOffer[];
-  offersIds: SelectedRentalOffer[];
-  reviews: OfferReview[];
-}
-
-function OfferPage({nearbyOffers, offersIds, reviews}: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
   const {id} = useParams();
-  const selectedOffer = offersIds.find((offer) => offer.id === id);
+  const dispatch = useAppDispatch();
+  const selectedOffer = useAppSelector((state) =>state.selectedOffer);
+  const nearByOffers = useAppSelector((state) =>state.nearPlaces);
+  const reviews = useAppSelector((state)=>state.reviews);
+  const nearPlacesOffers = nearByOffers.slice(0, NUMBER_NEARBY_OFFER);
+  const isAuthorization = useAppSelector((state)=>state.authorizationStatus);
+  const isOfferLoadingStatus = useAppSelector((state)=>state.isOfferLoading);
+  const isNearPlacesLoadingStatus = useAppSelector((state)=>state.isNearbyLoading);
+  const isReviewsLoadingStatus = useAppSelector((state)=>state.isReviewsLoading);
 
-  if (typeof selectedOffer === 'undefined') {
-    return <NotFoundPage/>;
+  useEffect(() =>{
+    if (id && (!selectedOffer || selectedOffer?.id !== id)) {
+      dispatch(fetchOfferAction(id));
+    }
+  },[id, dispatch, selectedOffer]);
+
+  if (!selectedOffer || isOfferLoadingStatus || isNearPlacesLoadingStatus || isReviewsLoadingStatus) {
+    return (
+      <LoadingPage />
+    );
   }
-  const offerWithoutSelected = nearbyOffers.filter((offer) => offer.id !== id);
-  const nearPlacesOffer = offerWithoutSelected.slice(0, NUMBER_NEARBY_OFFER);
-  const offers = [...offerWithoutSelected.slice(0, NUMBER_NEARBY_OFFER), selectedOffer];
+
+  const offers = [...nearByOffers.slice(0, NUMBER_NEARBY_OFFER), selectedOffer];
 
   return (
     <div className="page">
       <Helmet>
-        <title>6 городов. Предложения</title>
+        <title>6 городов. Предложение</title>
       </Helmet>
       <Header/>
 
@@ -43,7 +53,7 @@ function OfferPage({nearbyOffers, offersIds, reviews}: OfferPageProps): JSX.Elem
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {selectedOffer.images.map((item)=> <GalleryItem key={item} src={item}/>) }
+              {selectedOffer.images.slice(0,IMAGES_OFFER_COUNT).map((item)=> <GalleryItem key={item} src={item}/>) }
             </div>
           </div>
           <div className="offer__container container">
@@ -91,11 +101,11 @@ function OfferPage({nearbyOffers, offersIds, reviews}: OfferPageProps): JSX.Elem
 
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
+                    Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
                 </h2>
 
                 <ReviewList reviews={reviews}/>
-                <FormComment/>
+                {(isAuthorization === AuthorizationStatus.Auth && id) && <FormComment offerId={id}/>}
 
               </section>
             </div>
@@ -110,7 +120,7 @@ function OfferPage({nearbyOffers, offersIds, reviews}: OfferPageProps): JSX.Elem
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {nearPlacesOffer.map((offer) => (
+              {nearPlacesOffers.map((offer) => (
                 <OfferCard
                   key={offer.id}
                   offer={offer}
