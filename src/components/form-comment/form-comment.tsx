@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FormStateType, Ratings } from '../../types/form-comment';
 import FormRating from './components/form-rating';
 import { ComentsLenght } from '../../const';
@@ -26,16 +26,6 @@ function FormComment({offerId}:FormCommentProps):JSX.Element{
   const [formData, setFormData] = useState<FormStateType>(INITIAL_STATE_FORM);
   const dispatch = useAppDispatch();
   const isReviewPosting = useAppSelector((state)=>state.isReviewPosting);
-  const isReviewPostingError = useAppSelector((state)=>state.isReviewPostingError);
-
-  useEffect(() => {
-    if (isReviewPosting) {
-      setFormData({
-        comment: '',
-        rating: 0
-      });
-    }
-  }, [isReviewPosting]);
 
   const handleFieldChange = (name: string, value: number | string) => {
     setFormData({...formData, [name]: value});
@@ -44,15 +34,17 @@ function FormComment({offerId}:FormCommentProps):JSX.Element{
   const handleFormSubmit = (evt:ChangeEvent<HTMLFormElement>)=>{
     evt.preventDefault();
     const postFormData = {...formData};
-    dispatch(postReviewAction({postFormData, offerId}));
-    if (!isReviewPostingError) {
-      setFormData(postFormData);
-    } else {
-      setFormData(INITIAL_STATE_FORM);
-    }
+    dispatch(postReviewAction({postFormData, offerId}))
+      .then((response) => {
+        if (response.meta.requestStatus === 'fulfilled') {
+          setFormData({
+            comment: '',
+            rating: 0
+          });
+        }
+      });
     evt.currentTarget.reset();
   };
-
 
   return(
     <form onSubmit={handleFormSubmit} className="reviews__form form" action="#" method="post">

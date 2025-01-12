@@ -1,5 +1,5 @@
 import {APIRoute, RoutePath} from '../const';
-import {loadNearPlaces, loadOffer, loadOffers, loadReviews, redirectToRoute, setNearByLoadingStatus, setOfferLoadingStatus, setOffersLoadingStatus, setReviewPostingError, setReviewPostingStatus, setReviewsLoadingStatus} from './action';
+import {loadOffer, loadOffers, redirectToRoute, setOfferLoadingStatus, setOffersLoadingStatus} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer.js';
@@ -18,23 +18,19 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, ThunkType>(
   },
 );
 
-export const fetchNearbyAction = createAsyncThunk<void, string, ThunkType>(
+export const fetchNearbyAction = createAsyncThunk<RentalOffer[], string, ThunkTypeNew>(
   'data/fetchNearBy',
-  async (offerId, {dispatch, extra: api}) => {
-    dispatch(setNearByLoadingStatus(true));
+  async (offerId, {extra: api}) => {
     const {data} = await api.get<RentalOffer[]>(`${APIRoute.Offers}/${offerId}/nearby`);
-    dispatch(setNearByLoadingStatus(false));
-    dispatch(loadNearPlaces(data));
+    return data;
   },
 );
 
-export const fetchReviewsAction = createAsyncThunk<void, string, ThunkType>(
+export const fetchReviewsAction = createAsyncThunk<OfferReview[], string, ThunkTypeNew>(
   'reviews/fetchReviews',
-  async (offerId, {dispatch, extra: api}) => {
-    dispatch(setReviewsLoadingStatus(true));
+  async (offerId, {extra: api}) => {
     const {data} = await api.get<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`);
-    dispatch(setReviewsLoadingStatus(false));
-    dispatch(loadReviews(data));
+    return data;
   },
 );
 
@@ -80,20 +76,10 @@ export const logoutAction = createAsyncThunk<void, undefined, ThunkTypeNew>(
   },
 );
 
-export const postReviewAction = createAsyncThunk<void, {offerId: string; postFormData: { comment: string; rating: number } },ThunkType>(
+export const postReviewAction = createAsyncThunk<OfferReview, {offerId: string; postFormData: { comment: string; rating: number } },ThunkTypeNew>(
   'reviews/postReview',
-  async ({offerId, postFormData}, {dispatch, extra: api}) => {
-    try{
-      const postReview = await api.post<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`, postFormData);
-      dispatch(setReviewPostingStatus(true));
-      const {data} = await api.get<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`);
-
-      if (postReview?.data){
-        dispatch(loadReviews(data));
-        dispatch(setReviewPostingStatus(false));
-      }
-    } catch{
-      dispatch(setReviewPostingError(true));
-    }
+  async ({offerId, postFormData}, {extra: api}) => {
+    const {data} = await api.post<OfferReview>(`${APIRoute.Reviews}/${offerId}`, postFormData);
+    return data;
   },
 );
