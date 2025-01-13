@@ -1,5 +1,5 @@
 import {APIRoute, RoutePath} from '../const';
-import {loadOffer, loadOffers, redirectToRoute, setOfferLoadingStatus, setOffersLoadingStatus} from './action';
+import {loadOffer, redirectToRoute, setOfferLoadingStatus} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer.js';
@@ -8,13 +8,11 @@ import {UserData} from '../types/user-data';
 import { ThunkType, ThunkTypeNew } from '../types/api.js';
 import { OfferReview } from '../types/review.js';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, ThunkType>(
+export const fetchOffersAction = createAsyncThunk<RentalOffer[], undefined, ThunkTypeNew>(
   'data/fetchOffers',
-  async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOffersLoadingStatus(true));
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<RentalOffer[]>(APIRoute.Offers);
-    dispatch(setOffersLoadingStatus(false));
-    dispatch(loadOffers(data));
+    return data;
   },
 );
 

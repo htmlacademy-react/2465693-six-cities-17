@@ -1,10 +1,10 @@
-import { changeCity, loadOffers, changeSorting, setOffersLoadingStatus, loadOffer, loadNearPlaces, loadReviews, setOfferLoadingStatus} from './action';
+import { changeCity, changeSorting, loadOffer, setOfferLoadingStatus} from './action';
 import { AuthorizationStatus, DEFAULT_CITY, SortOption} from '../const';
 import { createReducer } from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer';
 import { UserData } from '../types/user-data';
 import { OfferReview } from '../types/review';
-import { checkAuthAction, fetchNearbyAction, fetchReviewsAction, loginAction, logoutAction, postReviewAction } from './api-action';
+import { checkAuthAction, fetchNearbyAction, fetchOffersAction, fetchReviewsAction, loginAction, logoutAction, postReviewAction } from './api-action';
 
 type InitialState = {
   city: string;
@@ -47,17 +47,20 @@ const reducer = createReducer(initialState, (builder)=> {
     .addCase(changeCity, (state, action) =>{
       state.city = action.payload;
     })
-    .addCase(loadOffers, (state, action) => {
+
+    .addCase(fetchOffersAction.pending, (state) => {
+      state.isOffersLoading = true;
+    })
+    .addCase(fetchOffersAction.fulfilled, (state, action) => {
+      state.isOffersLoading = false;
       state.offers = action.payload;
     })
+    .addCase(fetchOffersAction.rejected, (state) => {
+      state.isOffersLoading = false;
+    })
+
     .addCase(loadOffer, (state, action) => {
       state.selectedOffer = action.payload;
-    })
-    .addCase(loadNearPlaces, (state, action) => {
-      state.nearPlaces = action.payload;
-    })
-    .addCase(loadReviews, (state, action) => {
-      state.reviews = action.payload;
     })
     .addCase(changeSorting, (state, action) => {
       state.currentSort = action.payload;
@@ -112,9 +115,6 @@ const reducer = createReducer(initialState, (builder)=> {
       state.isReviewPosting = false;
     })
 
-    .addCase(setOffersLoadingStatus, (state, action) => {
-      state.isOffersLoading = action.payload;
-    })
     .addCase(setOfferLoadingStatus, (state, action) => {
       state.isOfferLoading = action.payload;
     });
