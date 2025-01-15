@@ -3,7 +3,7 @@ import { FormStateType, Ratings } from '../../types/form-comment';
 import FormRating from './components/form-rating';
 import { ComentsLenght } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { postReviewAction } from '../../store/api-action';
+import { postReviewAction } from '../../store/api-actions';
 
 const INITIAL_STATE_FORM: FormStateType = {
   rating: 0,

@@ -1,5 +1,5 @@
 import {APIRoute, RoutePath} from '../const';
-import {loadOffer, redirectToRoute, setOfferLoadingStatus} from './action';
+import {redirectToRoute} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer.js';
@@ -7,6 +7,10 @@ import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import { ThunkType, ThunkTypeNew } from '../types/api.js';
 import { OfferReview } from '../types/review.js';
+import axios from 'axios';
+import { StatusCodes } from 'http-status-codes';
+
+const createAppAsyncThunk = createAsyncThunk.withTypes<ThunkType>();
 
 export const fetchOffersAction = createAsyncThunk<RentalOffer[], undefined, ThunkTypeNew>(
   'data/fetchOffers',
@@ -32,21 +36,21 @@ export const fetchReviewsAction = createAsyncThunk<OfferReview[], string, ThunkT
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<void, string, ThunkType>(
+export const fetchOfferAction = createAppAsyncThunk<SelectedRentalOffer, string, ThunkType>(
   'data/fetchOffer',
   async (offerId, {dispatch, extra: api}) => {
-    dispatch(setOfferLoadingStatus(true));
     try {
       const {data} = await api.get<SelectedRentalOffer>(`${APIRoute.Offers}/${offerId}`);
-      dispatch(setOfferLoadingStatus(false));
-      dispatch(loadOffer(data));
       dispatch(fetchNearbyAction(offerId));
       dispatch(fetchReviewsAction(offerId));
-    } catch {
-      dispatch(setOfferLoadingStatus(false));
-      dispatch(redirectToRoute(RoutePath.NotFound));
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === StatusCodes.NOT_FOUND) {
+        dispatch(redirectToRoute(RoutePath.NotFound));
+      }
+      throw error;
     }
-  },
+  }
 );
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkTypeNew>(

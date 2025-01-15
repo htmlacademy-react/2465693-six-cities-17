@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import { useAppDispatch } from '../../hooks';
 import { useNavigate, Link } from 'react-router-dom';
-import { loginAction } from '../../store/api-action';
+import { loginAction } from '../../store/api-actions';
 import { RoutePath } from '../../const';
 import { getRandomCity } from '../../utils';
 import { changeCity } from '../../store/action';

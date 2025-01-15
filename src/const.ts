@@ -26,6 +26,13 @@ const enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+const enum NameSpace {
+  Auth = 'authorization',
+  Offers = 'offers',
+  Reviews = 'comments',
+  Favorites = 'favorite'
+}
+
 const LOCATIONS = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 const ONE_STAR_RATING = 100 / 5;
@@ -88,4 +95,4 @@ enum SortOption {
   TopRated = 'Top rated first',
 }
 
-export { BACKEND_URL, REQUEST_TIMEOUT, AuthorizationStatus, RoutePath, APIRoute, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption, IMAGES_OFFER_COUNT };
+export { BACKEND_URL, REQUEST_TIMEOUT, AuthorizationStatus, RoutePath, APIRoute, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption, IMAGES_OFFER_COUNT, NameSpace };

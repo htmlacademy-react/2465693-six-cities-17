@@ -1,7 +1,7 @@
 import { RoutePath } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { Link } from 'react-router-dom';
-import { logoutAction } from '../../../store/api-action';
+import { logoutAction } from '../../../store/api-actions';
 
 function HeaderNav (): JSX.Element {
   const dispatch = useAppDispatch();
