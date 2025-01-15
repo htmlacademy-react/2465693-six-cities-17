@@ -1,6 +1,7 @@
-import { SortOption } from '../const';
+import { AuthorizationStatus, SortOption } from '../const';
 import { store } from '../store';
 import { RentalOffer, SelectedRentalOffer } from './offer';
+import { UserData } from './user-data';
 
 // выводим тип хранилища
 export type AppState = ReturnType<typeof store.getState>;
@@ -20,4 +21,9 @@ export type OffersSlice = {
   isOffersLoading: boolean;
   isOfferLoading: boolean;
   isNearbyLoading: boolean;
-};
+}
+
+export type AuthSlice = {
+  authorizationStatus: AuthorizationStatus;
+  userInfo: UserData|null;
+}
