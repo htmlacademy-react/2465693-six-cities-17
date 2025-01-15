@@ -1,38 +1,30 @@
+import { useEffect} from 'react';
 import Map from '../../components/map/map';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { AuthorizationStatus, NUMBER_NEARBY_OFFER, IMAGES_OFFER_COUNT } from '../../const';
+import { NUMBER_NEARBY_OFFER} from '../../const';
 import Header from '../../components/header/header';
-import OfferCard from '../../components/offer-card/offer-card';
-import { capitalizeLetter, getRatingWidth } from '../../utils';
-import OfferHost from '../../components/offer-host/offer-host';
-import ReviewList from '../../components/review-list/review-list';
-import FormComment from '../../components/form-comment/form-comment';
-import GalleryItem from '../../components/gallery-item/gallery-item';
-import BookmarkButton from '../../components/bookmark-button/bookmark-button';
-import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
-import { useEffect} from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchOfferAction } from '../../store/api-action';
 import LoadingPage from '../loading-page/loading-page';
+import { fetchOfferAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import OfferDescription from '../../components/offer-description/offer-description';
+import NearPlaces from '../../components/near-places/near-places';
 
 function OfferPage(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const selectedOffer = useAppSelector((state) =>state.selectedOffer);
   const nearByOffers = useAppSelector((state) =>state.nearPlaces);
-  const reviews = useAppSelector((state)=>state.reviews);
   const nearPlacesOffers = nearByOffers.slice(0, NUMBER_NEARBY_OFFER);
-  const isAuthorization = useAppSelector((state)=>state.authorizationStatus);
   const isOfferLoadingStatus = useAppSelector((state)=>state.isOfferLoading);
   const isNearPlacesLoadingStatus = useAppSelector((state)=>state.isNearbyLoading);
   const isReviewsLoadingStatus = useAppSelector((state)=>state.isReviewsLoading);
 
   useEffect(() =>{
-    if (id && (!selectedOffer || selectedOffer?.id !== id)) {
+    if (id) {
       dispatch(fetchOfferAction(id));
     }
-  },[id, dispatch, selectedOffer]);
+  },[id, dispatch]);
 
   if (!selectedOffer || isOfferLoadingStatus || isNearPlacesLoadingStatus || isReviewsLoadingStatus) {
     return (
@@ -48,88 +40,12 @@ function OfferPage(): JSX.Element {
         <title>6 городов. Предложение</title>
       </Helmet>
       <Header/>
-
       <main className="page__main page__main--offer">
         <section className="offer">
-          <div className="offer__gallery-container container">
-            <div className="offer__gallery">
-              {selectedOffer.images.slice(0,IMAGES_OFFER_COUNT).map((item)=> <GalleryItem key={item} src={item}/>) }
-            </div>
-          </div>
-          <div className="offer__container container">
-            <div className="offer__wrapper">
-              {selectedOffer.isPremium &&
-                <div className="offer__mark">
-                  <span>Premium</span>
-                </div>}
-              <div className="offer__name-wrapper">
-                <h1 className="offer__name">
-                  {selectedOffer.title}
-                </h1>
-
-                <BookmarkButton isFavorite={selectedOffer.isFavorite} pageType={'offer'}/>
-
-              </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: `${getRatingWidth(selectedOffer.rating)}%` }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">{selectedOffer.rating}</span>
-              </div>
-              <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">
-                  {capitalizeLetter(selectedOffer.type)}
-                </li>
-                <li className="offer__feature offer__feature--bedrooms">
-                  {selectedOffer.bedrooms} {selectedOffer.bedrooms < 2 ? 'Bedroom' : 'Bedrooms'}
-                </li>
-                <li className="offer__feature offer__feature--adults">
-                  Max {selectedOffer.maxAdults } {selectedOffer.maxAdults < 2 ? 'Adult' : 'Adults'}
-                </li>
-              </ul>
-              <div className="offer__price">
-                <b className="offer__price-value">&euro;{selectedOffer.price}</b>
-                <span className="offer__price-text">&nbsp;night</span>
-              </div>
-              <div className="offer__inside">
-                <h2 className="offer__inside-title">What&apos;s inside</h2>
-                <OfferInsideList goods={selectedOffer.goods}/>
-              </div>
-
-              <OfferHost host={selectedOffer.host} description={selectedOffer.description}/>
-
-              <section className="offer__reviews reviews">
-                <h2 className="reviews__title">
-                    Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
-                </h2>
-
-                <ReviewList reviews={reviews}/>
-                {(isAuthorization === AuthorizationStatus.Auth && id) && <FormComment offerId={id}/>}
-
-              </section>
-            </div>
-          </div>
-
+          <OfferDescription selectedOffer={selectedOffer}/>
           <Map className={'offer__map'} offers={offers} activeOfferCardId={selectedOffer.id}/>
-
         </section>
-        <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">
-              Other places in the neighbourhood
-            </h2>
-            <div className="near-places__list places__list">
-              {nearPlacesOffers.map((offer) => (
-                <OfferCard
-                  key={offer.id}
-                  offer={offer}
-                  cardType='near-places'
-                />
-              ))}
-            </div>
-          </section>
-        </div>
+        <NearPlaces nearPlacesOffers={nearPlacesOffers}/>
       </main>
     </div>
   );

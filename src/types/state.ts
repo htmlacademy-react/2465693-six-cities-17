@@ -1,6 +1,7 @@
 import { AuthorizationStatus, SortOption } from '../const';
 import { store } from '../store';
 import { RentalOffer, SelectedRentalOffer } from './offer';
+import { OfferReview } from './review';
 import { UserData } from './user-data';
 
 // выводим тип хранилища
@@ -26,4 +27,10 @@ export type OffersSlice = {
 export type AuthSlice = {
   authorizationStatus: AuthorizationStatus;
   userInfo: UserData|null;
+}
+
+export type ReviewsSlice = {
+  reviews: OfferReview[];
+  isReviewsLoading: boolean;
+  isReviewPosting: boolean;
 }

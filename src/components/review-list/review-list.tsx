@@ -1,7 +1,7 @@
 import ReviewItem from '../review-item/review-item';
 import { OfferReview } from '../../types/review';
 import { sortToDate } from '../../utils';
-import { NUMBER_OF_REVIEW } from '../../const';
+import { MAX_NUMBER_OF_VISIBLE_REVIEW } from '../../const';
 
 type ReviewListProps ={
   reviews: OfferReview[];
@@ -9,15 +9,18 @@ type ReviewListProps ={
 
 function ReviewList({reviews}:ReviewListProps):JSX.Element {
   const reviewsSorted = sortToDate([...reviews]);
-  const tenReviews = reviewsSorted.slice(0, NUMBER_OF_REVIEW);
+  const visibleReviews = reviewsSorted.slice(0, MAX_NUMBER_OF_VISIBLE_REVIEW);
 
   return(
-    <ul className="reviews__list">
-      {tenReviews.map((review) => (
-        <ReviewItem key={review.id} review={review}/>))}
-    </ul>
-
-
+    <>
+      <h2 className="reviews__title">
+        Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
+      </h2>
+      <ul className="reviews__list">
+        {visibleReviews.map((review) => (
+          <ReviewItem key={review.id} review={review}/>))}
+      </ul>
+    </>
   );
 }
 
