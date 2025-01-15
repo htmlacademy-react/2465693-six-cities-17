@@ -27,6 +27,7 @@ const enum AuthorizationStatus {
 }
 
 const enum NameSpace {
+  App = 'app',
   Auth = 'authorization',
   Offers = 'offers',
   Reviews = 'comments',
