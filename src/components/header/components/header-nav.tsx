@@ -1,11 +1,12 @@
-import { RoutePath } from '../../../const';
+import { selectUserInfo } from '../../../store/auth/auth-selector';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { Link } from 'react-router-dom';
 import { logoutAction } from '../../../store/api-actions';
+import { RoutePath } from '../../../const';
+import { Link } from 'react-router-dom';
 
 function HeaderNav (): JSX.Element {
   const dispatch = useAppDispatch();
-  const {userInfo} = useAppSelector((state) =>state);
+  const userInfo = useAppSelector(selectUserInfo);
 
   const handleSignOutClick = () =>{
     dispatch(logoutAction());

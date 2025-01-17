@@ -5,7 +5,7 @@ import { OffersSlice } from '../../types/state';
 
 const initialState: OffersSlice = {
   offers: [],
-  selectedOffer: null,
+  chosenOffer: null,
   nearPlaces: [],
   isOffersLoading: false,
   isOfferLoading: false,
@@ -33,7 +33,7 @@ export const offersSlice = createSlice({
       })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.isOfferLoading = false;
-        state.selectedOffer = action.payload;
+        state.chosenOffer = action.payload;
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.isOfferLoading = false;

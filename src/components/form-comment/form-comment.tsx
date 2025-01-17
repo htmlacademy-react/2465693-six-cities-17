@@ -4,6 +4,7 @@ import FormRating from './components/form-rating';
 import { ComentsLenght } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewAction } from '../../store/api-actions';
+import { selectReviewsPosting } from '../../store/reviews/reviews-selector';
 
 const INITIAL_STATE_FORM: FormStateType = {
   rating: 0,
@@ -23,9 +24,9 @@ type FormCommentProps = {
 }
 
 function FormComment({offerId}:FormCommentProps):JSX.Element{
-  const [formData, setFormData] = useState<FormStateType>(INITIAL_STATE_FORM);
   const dispatch = useAppDispatch();
-  const isReviewPosting = useAppSelector((state)=>state.isReviewPosting);
+  const [formData, setFormData] = useState<FormStateType>(INITIAL_STATE_FORM);
+  const isReviewPosting = useAppSelector(selectReviewsPosting);
 
   const handleFieldChange = (name: string, value: number | string) => {
     setFormData({...formData, [name]: value});

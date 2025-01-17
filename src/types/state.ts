@@ -17,7 +17,7 @@ export type AppSlice = {
 
 export type OffersSlice = {
   offers: RentalOffer[];
-  selectedOffer: SelectedRentalOffer|null;
+  chosenOffer: SelectedRentalOffer|null;
   nearPlaces: RentalOffer[];
   isOffersLoading: boolean;
   isOfferLoading: boolean;

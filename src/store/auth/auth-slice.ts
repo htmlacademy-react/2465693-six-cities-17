@@ -8,7 +8,7 @@ const initialState: AuthSlice = {
   userInfo: null,
 };
 
-export const offersSlice = createSlice({
+export const authSlice = createSlice({
   name: NameSpace.Auth,
   initialState,
   reducers: {},

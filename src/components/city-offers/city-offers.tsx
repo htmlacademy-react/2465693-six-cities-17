@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { RentalOffer } from '../../types/offer';
 import OfferCardsList from '../offer-cards-list/offer-cards-list';
 import Sorting from '../sorting/sorting';
 import Map from '../map/map';
+import { useState } from 'react';
+import { RentalOffer } from '../../types/offer';
 
 type CityOffersProps = {
   currentCityOffers: RentalOffer[];

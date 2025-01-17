@@ -13,7 +13,6 @@ const getRatingWidth = (value: number) => Math.round(value) * ONE_STAR_RATING;
 const getDateFormat = (dateString: string): string => {
   const date: Date = new Date(dateString);
   const option: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long' };
-
   const formatedDate = date.toLocaleDateString('en-US', option);
   return formatedDate;
 };
@@ -45,7 +44,6 @@ const getSortedOfferCards = (offers: RentalOffer[], currentSort: SortOption) =>{
 };
 
 //получаем случайный город
-const getRandomCity = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
-
+const getRandomCity = ():string=> LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
 
 export { capitalizeLetter, getRatingWidth, getDateFormat, sortToDate, getSortedOfferCards, getRandomCity };

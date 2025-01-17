@@ -58,9 +58,9 @@ const ComentsLenght = {
   MAX: 300,
 };
 
-const MAX_NUMBER_OF_VISIBLE_REVIEW = 10;
+const MAX_VISIBLE_REVIEW = 10;
 
-const NUMBER_NEARBY_OFFER = 3;
+const MAX_VISIBLE_NEARBY_OFFER = 3;
 
 const BookmarkButtonSize = {
   'place-card': {
@@ -96,4 +96,4 @@ enum SortOption {
   TopRated = 'Top rated first',
 }
 
-export { BACKEND_URL, REQUEST_TIMEOUT, AuthorizationStatus, RoutePath, APIRoute, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, MAX_NUMBER_OF_VISIBLE_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption, MAX_IMAGES_OFFER_COUNT, NameSpace };
+export { BACKEND_URL, REQUEST_TIMEOUT, AuthorizationStatus, RoutePath, APIRoute, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, MAX_VISIBLE_REVIEW, MAX_VISIBLE_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption, MAX_IMAGES_OFFER_COUNT, NameSpace };

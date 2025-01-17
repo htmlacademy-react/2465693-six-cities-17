@@ -9,7 +9,7 @@ const initialState: ReviewsSlice = {
   isReviewPosting: false,
 };
 
-export const offersSlice = createSlice({
+export const reviewsSlice = createSlice({
   name: NameSpace.Reviews,
   initialState,
   reducers: {},

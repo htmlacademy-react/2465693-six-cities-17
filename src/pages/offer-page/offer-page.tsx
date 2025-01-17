@@ -1,38 +1,41 @@
-import { useEffect} from 'react';
 import Map from '../../components/map/map';
-import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
-import { NUMBER_NEARBY_OFFER} from '../../const';
 import Header from '../../components/header/header';
 import LoadingPage from '../loading-page/loading-page';
+import NearPlaces from '../../components/near-places/near-places';
+import OfferDescription from '../../components/offer-description/offer-description';
+import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
+import { MAX_VISIBLE_NEARBY_OFFER } from '../../const';
 import { fetchOfferAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import OfferDescription from '../../components/offer-description/offer-description';
-import NearPlaces from '../../components/near-places/near-places';
+import { selectReviewsLoading } from '../../store/reviews/reviews-selector';
+import { selectChosenOffer, selectNearByLoading, selectNearByOffers, selectOfferLoading } from '../../store/offers/offers-selector';
 
 function OfferPage(): JSX.Element {
-  const {id} = useParams();
   const dispatch = useAppDispatch();
-  const selectedOffer = useAppSelector((state) =>state.selectedOffer);
-  const nearByOffers = useAppSelector((state) =>state.nearPlaces);
-  const nearPlacesOffers = nearByOffers.slice(0, NUMBER_NEARBY_OFFER);
-  const isOfferLoadingStatus = useAppSelector((state)=>state.isOfferLoading);
-  const isNearPlacesLoadingStatus = useAppSelector((state)=>state.isNearbyLoading);
-  const isReviewsLoadingStatus = useAppSelector((state)=>state.isReviewsLoading);
+  const {id} = useParams();
+  const chosenOffer = useAppSelector(selectChosenOffer);
 
   useEffect(() =>{
-    if (id) {
+    if (id && (!chosenOffer || chosenOffer?.id !== id)) {
       dispatch(fetchOfferAction(id));
     }
-  },[id, dispatch]);
+  },[id, chosenOffer, dispatch]);
 
-  if (!selectedOffer || isOfferLoadingStatus || isNearPlacesLoadingStatus || isReviewsLoadingStatus) {
+  const nearByOffers = useAppSelector(selectNearByOffers);
+  const visibleNearPlacesOffers = nearByOffers.slice(0, MAX_VISIBLE_NEARBY_OFFER);
+  const isOfferLoading = useAppSelector(selectOfferLoading);
+  const isNearPlacesLoading = useAppSelector(selectNearByLoading);
+  const isReviewsLoading = useAppSelector(selectReviewsLoading);
+
+  if (!chosenOffer || isOfferLoading || isNearPlacesLoading || isReviewsLoading) {
     return (
       <LoadingPage />
     );
   }
 
-  const offers = [...nearByOffers.slice(0, NUMBER_NEARBY_OFFER), selectedOffer];
+  const offers = [...visibleNearPlacesOffers, chosenOffer];
 
   return (
     <div className="page">
@@ -42,10 +45,10 @@ function OfferPage(): JSX.Element {
       <Header/>
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferDescription selectedOffer={selectedOffer}/>
-          <Map className={'offer__map'} offers={offers} activeOfferCardId={selectedOffer.id}/>
+          <OfferDescription chosenOffer={chosenOffer}/>
+          <Map className={'offer__map'} offers={offers} activeOfferCardId={chosenOffer.id}/>
         </section>
-        <NearPlaces nearPlacesOffers={nearPlacesOffers}/>
+        <NearPlaces nearPlacesOffers={visibleNearPlacesOffers}/>
       </main>
     </div>
   );
