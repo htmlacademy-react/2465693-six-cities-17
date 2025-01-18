@@ -1,15 +1,13 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import { Helmet } from 'react-helmet-async';
-import { RentalOffer } from '../../types/offer';
 import classNames from 'classnames';
 import FavoriteList from '../../components/favorite-component/favorite-list';
+import { useAppSelector } from '../../hooks';
+import { selectFavorites } from '../../store/favorites/favorite-selector';
 
-type FavoritesPageProps = {
-  offers: RentalOffer[];
-};
-
-function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
+function FavoritesPage(): JSX.Element {
+  const offers = useAppSelector(selectFavorites);
 
   return (
     <div className={classNames('page', { 'page--favorites-empty': !offers.length })}>

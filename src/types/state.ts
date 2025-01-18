@@ -34,3 +34,9 @@ export type ReviewsSlice = {
   isReviewsLoading: boolean;
   isReviewPosting: boolean;
 }
+
+export type FavoritesSlice = {
+  favorites: RentalOffer[];
+  isFavoritesLoading: boolean;
+  isFavoritesPosting: boolean;
+}

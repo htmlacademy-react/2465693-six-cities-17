@@ -5,14 +5,14 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import { RentalOffer, SelectedRentalOffer } from '../types/offer.js';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import { ThunkType, ThunkTypeNew } from '../types/api.js';
+import { ThunkType } from '../types/api.js';
 import { OfferReview } from '../types/review.js';
 import axios from 'axios';
 import { StatusCodes } from 'http-status-codes';
 
 const createAppAsyncThunk = createAsyncThunk.withTypes<ThunkType>();
 
-export const fetchOffersAction = createAsyncThunk<RentalOffer[], undefined, ThunkTypeNew>(
+export const fetchOffersAction = createAsyncThunk<RentalOffer[], undefined, ThunkType>(
   'data/fetchOffers',
   async (_arg, {extra: api}) => {
     const {data} = await api.get<RentalOffer[]>(APIRoute.Offers);
@@ -20,7 +20,7 @@ export const fetchOffersAction = createAsyncThunk<RentalOffer[], undefined, Thun
   },
 );
 
-export const fetchNearbyAction = createAsyncThunk<RentalOffer[], string, ThunkTypeNew>(
+export const fetchNearbyAction = createAsyncThunk<RentalOffer[], string, ThunkType>(
   'data/fetchNearBy',
   async (offerId, {extra: api}) => {
     const {data} = await api.get<RentalOffer[]>(`${APIRoute.Offers}/${offerId}/nearby`);
@@ -28,7 +28,7 @@ export const fetchNearbyAction = createAsyncThunk<RentalOffer[], string, ThunkTy
   },
 );
 
-export const fetchReviewsAction = createAsyncThunk<OfferReview[], string, ThunkTypeNew>(
+export const fetchReviewsAction = createAsyncThunk<OfferReview[], string, ThunkType>(
   'reviews/fetchReviews',
   async (offerId, {extra: api}) => {
     const {data} = await api.get<OfferReview[]>(`${APIRoute.Reviews}/${offerId}`);
@@ -53,24 +53,43 @@ export const fetchOfferAction = createAppAsyncThunk<SelectedRentalOffer, string,
   }
 );
 
-export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkTypeNew>(
+export const fetchFavoritesAction = createAsyncThunk<RentalOffer[], undefined, ThunkType>(
+  'favorite/fetchFavorites',
+  async (_, {extra: api}) => {
+    const {data} = await api.get<RentalOffer[]>(APIRoute.Favorites);
+    return data;
+  }
+);
+
+export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkType>(
   'user/checkAuth',
-  async (_arg, {extra: api}) => {
+  async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<UserData>(APIRoute.Login);
+    if (data) {
+      dispatch(fetchFavoritesAction());
+    }
     return data;
   },
 );
 
-export const loginAction = createAsyncThunk<UserData, AuthData, ThunkTypeNew>(
+export const loginAction = createAsyncThunk<UserData, AuthData, ThunkType>(
   'user/login',
-  async ({email, password}, {extra: api}) => {
-    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(data.token);
-    return data;
+  async ({email, password}, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      saveToken(data.token);
+      dispatch(fetchFavoritesAction());
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === StatusCodes.NOT_FOUND) {
+        dispatch(redirectToRoute(RoutePath.NotFound));
+      }
+      throw error;
+    }
   },
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, ThunkTypeNew>(
+export const logoutAction = createAsyncThunk<void, undefined, ThunkType>(
   'user/logout',
   async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
@@ -78,7 +97,7 @@ export const logoutAction = createAsyncThunk<void, undefined, ThunkTypeNew>(
   },
 );
 
-export const postReviewAction = createAsyncThunk<OfferReview, {offerId: string; postFormData: { comment: string; rating: number } },ThunkTypeNew>(
+export const postReviewAction = createAsyncThunk<OfferReview, {offerId: string; postFormData: { comment: string; rating: number } }, ThunkType>(
   'reviews/postReview',
   async ({offerId, postFormData}, {extra: api}) => {
     const {data} = await api.post<OfferReview>(`${APIRoute.Reviews}/${offerId}`, postFormData);

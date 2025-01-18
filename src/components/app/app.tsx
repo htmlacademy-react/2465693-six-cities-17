@@ -9,17 +9,12 @@ import browserHistory from '../../browser-history.ts';
 import LoadingPage from '../../pages/loading-page/loading-page.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { RoutePath, AuthorizationStatus } from '../../const.ts';
-import { RentalOffer } from '../../types/offer.ts';
 import { useAppSelector } from '../../hooks/index.ts';
 import { selectAuthorizationStatus } from '../../store/auth/auth-selector.ts';
 import { selectOffersLoading } from '../../store/offers/offers-selector.ts';
 import { Route, Routes } from 'react-router-dom';
 
-type AppPageProps = {
-  favorites: RentalOffer[];
-  };
-
-function App({ favorites}: AppPageProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const isOffersLoading = useAppSelector(selectOffersLoading);
 
@@ -36,7 +31,7 @@ function App({ favorites}: AppPageProps): JSX.Element {
           <Route path={RoutePath.Index}>
             <Route index element={<MainPage />} />
             <Route path={RoutePath.Offer} element={<OfferPage/>} />
-            <Route path={RoutePath.Favorites} element={<PrivateRoute><FavoritesPage offers={favorites} /></PrivateRoute>}/>
+            <Route path={RoutePath.Favorites} element={<PrivateRoute><FavoritesPage /></PrivateRoute>}/>
             <Route path={RoutePath.Login} element={<LoginPage />} />
             <Route path={RoutePath.NotFound} element={<NotFoundPage />} />
           </Route>
