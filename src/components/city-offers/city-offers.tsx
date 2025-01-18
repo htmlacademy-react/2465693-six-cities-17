@@ -1,7 +1,7 @@
 import OfferCardsList from '../offer-cards-list/offer-cards-list';
 import Sorting from '../sorting/sorting';
 import Map from '../map/map';
-import { useState } from 'react';
+import { useCallback, useState, memo } from 'react';
 import { RentalOffer } from '../../types/offer';
 
 type CityOffersProps = {
@@ -11,12 +11,12 @@ type CityOffersProps = {
 
 function CityOffers({currentCityOffers, activeLocation}:CityOffersProps): JSX.Element {
   const [activeOfferCardId, setActiveOfferCardId] = useState<string | null>('');
-  const offerCardMouseEnterHandler = (id: string): void => {
+  const offerCardMouseEnterHandler = useCallback((id: string): void => {
     setActiveOfferCardId(id);
-  };
-  const offerCardMouseLeaveHandler = (): void => {
+  },[]);
+  const offerCardMouseLeaveHandler = useCallback((): void => {
     setActiveOfferCardId(null);
-  };
+  },[]);
 
   return (
     <>
@@ -34,4 +34,4 @@ function CityOffers({currentCityOffers, activeLocation}:CityOffersProps): JSX.El
   );
 }
 
-export default CityOffers;
+export default memo(CityOffers);

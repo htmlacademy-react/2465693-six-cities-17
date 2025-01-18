@@ -3,6 +3,7 @@ import { RentalOffer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 import { getSortedOfferCards } from '../../utils';
 import { selectCurrentSort } from '../../store/app/app-selector';
+import { memo } from 'react';
 
 type OfferCardsListProps = {
   offers: RentalOffer[];
@@ -30,4 +31,4 @@ function OfferCardsList({offers, onOfferCardMouseEnterHandler, onOfferCardMouseL
   );
 }
 
-export default OfferCardsList;
+export default memo(OfferCardsList);

@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import LoadingPage from '../loading-page/loading-page';
 import NearPlaces from '../../components/near-places/near-places';
 import OfferDescription from '../../components/offer-description/offer-description';
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { MAX_VISIBLE_NEARBY_OFFER } from '../../const';
@@ -54,4 +54,4 @@ function OfferPage(): JSX.Element {
   );
 }
 
-export default OfferPage;
+export default memo(OfferPage);

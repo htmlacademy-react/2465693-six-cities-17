@@ -1,5 +1,6 @@
 import { LOCATIONS } from '../../const';
 import City from '../city/city';
+import { memo } from 'react';
 
 
 type LocationListProps = {
@@ -21,4 +22,4 @@ function LocationsList({ activeLocation }: LocationListProps): JSX.Element {
   );
 }
 
-export default LocationsList;
+export default memo(LocationsList);

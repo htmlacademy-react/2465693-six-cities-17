@@ -28,9 +28,9 @@ function FormComment({offerId}:FormCommentProps):JSX.Element{
   const [formData, setFormData] = useState<FormStateType>(INITIAL_STATE_FORM);
   const isReviewPosting = useAppSelector(selectReviewsPosting);
 
-  const handleFieldChange = (name: string, value: number | string) => {
-    setFormData({...formData, [name]: value});
-  };
+  const handleFieldChange = ((name: string, value: number | string) =>
+    setFormData({...formData, [name]: value}));
+
 
   const handleFormSubmit = (evt:ChangeEvent<HTMLFormElement>)=>{
     evt.preventDefault();
