@@ -1,20 +1,20 @@
 import { MAX_IMAGES_OFFER_COUNT } from '../../const';
-import { SelectedRentalOffer } from '../../types/offer';
 import GalleryItem from '../gallery-item/gallery-item';
+import { memo } from 'react';
 
 type OfferGalleryProps ={
-  chosenOffer: SelectedRentalOffer;
+  images: string[];
 }
 
-function OfferGallery({chosenOffer}:OfferGalleryProps) {
+function OfferGallery({images}:OfferGalleryProps) {
 
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
-        {chosenOffer.images.slice(0,MAX_IMAGES_OFFER_COUNT).map((item)=> <GalleryItem key={item} src={item}/>) }
+        {images.slice(0,MAX_IMAGES_OFFER_COUNT).map((item)=> <GalleryItem key={item} src={item}/>) }
       </div>
     </div>
   );
 }
 
-export default OfferGallery;
+export default memo(OfferGallery);

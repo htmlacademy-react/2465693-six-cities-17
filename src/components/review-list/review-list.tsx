@@ -3,6 +3,7 @@ import { OfferReview } from '../../types/review';
 import { useAppSelector } from '../../hooks';
 import { getVisibleReviews } from '../../store/reviews/reviews-selector';
 
+
 type ReviewListProps ={
   reviews: OfferReview[];
 }

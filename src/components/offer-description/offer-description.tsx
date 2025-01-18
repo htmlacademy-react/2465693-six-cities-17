@@ -18,52 +18,52 @@ type OfferDescriptionProps ={
 function OfferDescription({chosenOffer}:OfferDescriptionProps) {
   const reviews = useAppSelector(selectReviews);
   const isAuthorization = useAppSelector(selectAuthorizationStatus);
+  const {id, title, description, type, price, images, goods, host, isFavorite, isPremium, rating, bedrooms, maxAdults} = chosenOffer;
 
   return (
     <>
-      <OfferGallery chosenOffer={chosenOffer}/>
+      <OfferGallery images={images}/>
       <div className="offer__container container">
         <div className="offer__wrapper">
-          {chosenOffer.isPremium &&
+          {isPremium &&
                 <div className="offer__mark">
                   <span>Premium</span>
                 </div>}
           <div className="offer__name-wrapper">
             <h1 className="offer__name">
-              {chosenOffer.title}
+              {title}
             </h1>
-            <BookmarkButton isFavorite={chosenOffer.isFavorite} pageType={'offer'}/>
+            <BookmarkButton isFavorite={isFavorite} pageType={'offer'}/>
           </div>
           <div className="offer__rating rating">
             <div className="offer__stars rating__stars">
-              <span style={{ width: `${getRatingWidth(chosenOffer.rating)}%` }}></span>
+              <span style={{ width: `${getRatingWidth(rating)}%` }}></span>
               <span className="visually-hidden">Rating</span>
             </div>
-            <span className="offer__rating-value rating__value">{chosenOffer.rating}</span>
+            <span className="offer__rating-value rating__value">{rating}</span>
           </div>
           <ul className="offer__features">
             <li className="offer__feature offer__feature--entire">
-              {capitalizeLetter(chosenOffer.type)}
+              {capitalizeLetter(type)}
             </li>
             <li className="offer__feature offer__feature--bedrooms">
-              {chosenOffer.bedrooms} {chosenOffer.bedrooms < 2 ? 'Bedroom' : 'Bedrooms'}
+              {bedrooms} {bedrooms < 2 ? 'Bedroom' : 'Bedrooms'}
             </li>
             <li className="offer__feature offer__feature--adults">
-                  Max {chosenOffer.maxAdults } {chosenOffer.maxAdults < 2 ? 'Adult' : 'Adults'}
+                  Max {maxAdults } {maxAdults < 2 ? 'Adult' : 'Adults'}
             </li>
           </ul>
           <div className="offer__price">
-            <b className="offer__price-value">&euro;{chosenOffer.price}</b>
+            <b className="offer__price-value">&euro;{price}</b>
             <span className="offer__price-text">&nbsp;night</span>
           </div>
-          <OfferInsideList goods={chosenOffer.goods}/>
-          <OfferHost host={chosenOffer.host} description={chosenOffer.description}/>
+          <OfferInsideList goods={goods}/>
+          <OfferHost host={host} description={description}/>
 
           <section className="offer__reviews reviews">
             <ReviewList reviews={reviews}/>
-            {(isAuthorization === AuthorizationStatus.Auth && chosenOffer.id)
-            && <FormComment offerId={chosenOffer.id}/>}
-
+            {(isAuthorization === AuthorizationStatus.Auth && id)
+            && <FormComment offerId={id}/>}
           </section>
         </div>
       </div>
