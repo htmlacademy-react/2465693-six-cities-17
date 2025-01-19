@@ -2,6 +2,8 @@ import { useAppSelector } from '../../hooks';
 import { RentalOffer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 import { getSortedOfferCards } from '../../utils';
+import { selectCurrentSort } from '../../store/app/app-selector';
+import { memo } from 'react';
 
 type OfferCardsListProps = {
   offers: RentalOffer[];
@@ -9,8 +11,8 @@ type OfferCardsListProps = {
   onOfferCardMouseLeaveHandler: () => void;
 };
 
-function OfferCardsList({offers, onOfferCardMouseEnterHandler, onOfferCardMouseLeaveHandler}: OfferCardsListProps): JSX.Element {
-  const currentSort = useAppSelector((state) => state.currentSort);
+function OfferCardsListTemplate({offers, onOfferCardMouseEnterHandler, onOfferCardMouseLeaveHandler}: OfferCardsListProps): JSX.Element {
+  const currentSort = useAppSelector(selectCurrentSort);
   let sortedOfferCards: RentalOffer[] = [];
   sortedOfferCards = getSortedOfferCards(offers, currentSort);
 
@@ -28,5 +30,5 @@ function OfferCardsList({offers, onOfferCardMouseEnterHandler, onOfferCardMouseL
     </div>
   );
 }
-
+const OfferCardsList = memo(OfferCardsListTemplate);
 export default OfferCardsList;

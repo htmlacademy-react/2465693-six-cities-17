@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../../hooks';
+import { selectReviewsPosting } from '../../../store/reviews/reviews-selector';
 
 type FormRatingType = {
   value: number;
@@ -8,7 +9,7 @@ type FormRatingType = {
 }
 
 function FormRating({value, title, handleFieldChange: handleFieldChange, currentRating}: FormRatingType):JSX.Element {
-  const isReviewPosting = useAppSelector((state)=>state.isReviewPosting);
+  const isReviewPosting = useAppSelector(selectReviewsPosting);
 
   return(
     <>

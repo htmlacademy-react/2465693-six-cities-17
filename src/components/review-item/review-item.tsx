@@ -1,6 +1,5 @@
 import { OfferReview } from '../../types/review';
-import { getRatingWidth } from '../../utils';
-import { getDateFormat } from '../../utils';
+import { getRatingWidth, getDateFormat } from '../../utils';
 
 type ReviewItemProps ={
   review: OfferReview;

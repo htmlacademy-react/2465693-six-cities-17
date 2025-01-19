@@ -1,11 +1,15 @@
-import { RoutePath } from '../../../const';
+import { selectUserInfo } from '../../../store/auth/auth-selector';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { logoutAction } from '../../../store/api-actions';
+import { RoutePath } from '../../../const';
 import { Link } from 'react-router-dom';
-import { logoutAction } from '../../../store/api-action';
+import { selectFavorites } from '../../../store/favorites/favorite-selector';
 
 function HeaderNav (): JSX.Element {
   const dispatch = useAppDispatch();
-  const {userInfo} = useAppSelector((state) =>state);
+  const userInfo = useAppSelector(selectUserInfo);
+  const favoritesCount = useAppSelector(selectFavorites).length;
+  const userAvatar = useAppSelector(selectUserInfo)?.avatarUrl;
 
   const handleSignOutClick = () =>{
     dispatch(logoutAction());
@@ -20,11 +24,11 @@ function HeaderNav (): JSX.Element {
               className="header__nav-link header__nav-link--profile"
               to={RoutePath.Favorites}
             >
-              <div className="header__avatar-wrapper user__avatar-wrapper"/>
+              <div className="header__avatar-wrapper user__avatar-wrapper" style={{backgroundImage: `url(${userAvatar})`, borderRadius: '50%'}}/>
               <span className="header__user-name user__name">
                 {userInfo?.email}
               </span>
-              {userInfo && <span className="header__favorite-count">3</span>}
+              {userInfo && (favoritesCount > 0 && <span className="header__favorite-count">{favoritesCount}</span>)}
             </Link>
             :
             <Link

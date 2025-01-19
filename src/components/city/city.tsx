@@ -1,28 +1,32 @@
 import classNames from 'classnames';
+import { useAppDispatch } from '../../hooks';
+import { setCity } from '../../store/app/app-slice';
+import { MouseEvent, useCallback, memo } from 'react';
 
 type CityProps = {
   name: string;
   isActiveCity: boolean;
-  clickHandler: (city: string) => void;
 };
 
-function City(CityProps: CityProps): JSX.Element {
-  const { name, isActiveCity, clickHandler } = CityProps;
+function CityTemplate({ name, isActiveCity}: CityProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const linkClass = classNames('locations__item-link', 'tabs__item', { 'tabs__item--active': isActiveCity });
+  const handleCityClick = useCallback((evt : MouseEvent<HTMLElement>) => {
+    evt.preventDefault();
+    dispatch(setCity(name));
+  },[name,dispatch]
+  );
 
   return (
     <li className="locations__item">
       <a
         className={linkClass}
-        onClick={(evt)=>{
-          evt.preventDefault();
-          clickHandler(name);
-        }}
+        onClick={handleCityClick}
       >
         <span>{name}</span>
       </a>
     </li>
   );
 }
-
+const City = memo(CityTemplate);
 export default City;

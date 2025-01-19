@@ -1,23 +1,26 @@
 import ReviewItem from '../review-item/review-item';
 import { OfferReview } from '../../types/review';
-import { sortToDate } from '../../utils';
-import { NUMBER_OF_REVIEW } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { getVisibleReviews } from '../../store/reviews/reviews-selector';
+
 
 type ReviewListProps ={
   reviews: OfferReview[];
 }
 
 function ReviewList({reviews}:ReviewListProps):JSX.Element {
-  const reviewsSorted = sortToDate([...reviews]);
-  const tenReviews = reviewsSorted.slice(0, NUMBER_OF_REVIEW);
+  const visibleReviews = useAppSelector(getVisibleReviews);
 
   return(
-    <ul className="reviews__list">
-      {tenReviews.map((review) => (
-        <ReviewItem key={review.id} review={review}/>))}
-    </ul>
-
-
+    <>
+      <h2 className="reviews__title">
+        Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
+      </h2>
+      <ul className="reviews__list">
+        {visibleReviews.map((review) => (
+          <ReviewItem key={review.id} review={review}/>))}
+      </ul>
+    </>
   );
 }
 

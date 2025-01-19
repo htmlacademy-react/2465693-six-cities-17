@@ -2,7 +2,7 @@ const BACKEND_URL = 'https://16.design.htmlacademy.pro/six-cities';
 
 const REQUEST_TIMEOUT = 5000;
 
-const IMAGES_OFFER_COUNT = 6;
+const MAX_IMAGES_OFFER_COUNT = 6;
 
 const enum RoutePath {
   Index = '/',
@@ -24,6 +24,14 @@ const enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+}
+
+const enum NameSpace {
+  App = 'app',
+  Auth = 'authorization',
+  Offers = 'offers',
+  Reviews = 'comments',
+  Favorites = 'favorite'
 }
 
 const LOCATIONS = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
@@ -50,9 +58,9 @@ const ComentsLenght = {
   MAX: 300,
 };
 
-const NUMBER_OF_REVIEW = 10;
+const MAX_VISIBLE_REVIEW = 10;
 
-const NUMBER_NEARBY_OFFER = 3;
+const MAX_VISIBLE_NEARBY_OFFER = 3;
 
 const BookmarkButtonSize = {
   'place-card': {
@@ -88,4 +96,4 @@ enum SortOption {
   TopRated = 'Top rated first',
 }
 
-export { BACKEND_URL, REQUEST_TIMEOUT, AuthorizationStatus, RoutePath, APIRoute, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, NUMBER_OF_REVIEW, NUMBER_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption, IMAGES_OFFER_COUNT };
+export { BACKEND_URL, REQUEST_TIMEOUT, AuthorizationStatus, RoutePath, APIRoute, LOCATIONS, ONE_STAR_RATING, CardImageSize, ComentsLenght, MAX_VISIBLE_REVIEW, MAX_VISIBLE_NEARBY_OFFER, BookmarkButtonSize, MapSetting, MarkerSetting, DEFAULT_CITY, SortOption, MAX_IMAGES_OFFER_COUNT, NameSpace };

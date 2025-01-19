@@ -1,22 +1,23 @@
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useEffect, useRef, useState } from 'react';
-import { changeSorting } from '../../store/action';
-import { SortOption } from '../../const';
 import classNames from 'classnames';
+import { selectCity, selectCurrentSort } from '../../store/app/app-selector';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setCurrentSort } from '../../store/app/app-slice';
+import { useEffect, useRef, useState, memo } from 'react';
+import { SortOption } from '../../const';
 
-function Sorting ():JSX.Element {
+function SortingTemplate ():JSX.Element {
   const [isSortingListOpen, setIsSortingListOpen] = useState(false);
   const sortingListClass = classNames('places__options places__options--custom', isSortingListOpen && 'places__options--opened');
 
   const dispatch = useAppDispatch();
-  const currentSort = useAppSelector((state)=> state.currentSort);
-  const currentCity = useAppSelector((state)=>state.city);
+  const currentSort = useAppSelector(selectCurrentSort);
+  const currentCity = useAppSelector(selectCity);
 
   const sortSpanRef = useRef<HTMLElement>(null);
 
   useEffect(() => (
     () => {
-      dispatch(changeSorting(SortOption.Popular));
+      dispatch(setCurrentSort(SortOption.Popular));
     }
   ), [currentCity, dispatch]);
 
@@ -56,7 +57,7 @@ function Sorting ():JSX.Element {
             tabIndex={0}
             onClick={()=> {
               setIsSortingListOpen(!isSortingListOpen);
-              dispatch(changeSorting(item));
+              dispatch(setCurrentSort(item));
             }}
           >
             {item}
@@ -66,5 +67,5 @@ function Sorting ():JSX.Element {
     </form>
   );
 }
-
+const Sorting = memo(SortingTemplate);
 export default Sorting;
