@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import { selectCity, selectCurrentSort } from '../../store/app/app-selector';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCurrentSort } from '../../store/app/app-slice';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import { SortOption } from '../../const';
 
-function Sorting ():JSX.Element {
+function SortingTemplate ():JSX.Element {
   const [isSortingListOpen, setIsSortingListOpen] = useState(false);
   const sortingListClass = classNames('places__options places__options--custom', isSortingListOpen && 'places__options--opened');
 
@@ -67,5 +67,5 @@ function Sorting ():JSX.Element {
     </form>
   );
 }
-
+const Sorting = memo(SortingTemplate);
 export default Sorting;
